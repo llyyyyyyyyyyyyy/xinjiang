@@ -1,0 +1,36 @@
+import * as types from './mutation_type'
+export default{
+  sendA({commit},aData){
+    commit(types.SEND_A,aData);
+  },
+  sendB({commit},bData){
+    commit(types.SEND_B,bData);
+  },
+  sendC({commit},cData){
+    commit(types.SEND_C,cData);
+  },
+  sendD({commit},dData){
+    commit(types.SEND_D,dData);
+  },
+  sendE({commit},eData){
+    commit(types.SEND_E,eData);
+  },
+  sendF({commit},fData){
+    commit(types.SEND_F,fData);
+  },
+  sendG({commit},gData){
+    commit(types.SEND_G,gData);
+  },
+  sendH({commit},hData){
+    commit(types.SEND_H,hData);
+  },
+  sendI({commit},iData){
+    commit(types.SEND_I,iData);
+  },
+  sendJ({commit},jData){
+    commit(types.SEND_J,jData);
+  },
+  sendK({commit},kData){
+    commit(types.SEND_K,kData);
+  }
+}
