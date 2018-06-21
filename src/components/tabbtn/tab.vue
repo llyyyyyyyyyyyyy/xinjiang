@@ -29,7 +29,7 @@ export default {
                 {
 						tabImg:require('../../assets/images/tabicons/add.png'),
 						tabHigh:require('../../assets/images/tabicons/add.png'),
-						paths:'/chooseCity',
+						paths:'/add',
 						isHigh:true,
 					},
                 {
@@ -54,7 +54,6 @@ export default {
 				this.tabs[i].isHigh = true;
 			}
             this.tabs[index].isHigh = false;
-            // this.$router.push(tab.path)
         }
     }
 }

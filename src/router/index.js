@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/home/home.vue'
-
+import Trip from '../components/trip/trip.vue'
 
 
 
@@ -12,8 +12,12 @@ export default new Router({
     {
       path: '/',
       component:Home,
-      name:'Home'
+
     },
-    
+    {
+      path: '/trip',
+      component:Trip,
+      name:'trip'
+    },
   ]
 })

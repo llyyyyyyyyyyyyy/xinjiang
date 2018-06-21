@@ -127,17 +127,16 @@
             </swiper>
         </div>
         <!--tab-->
-        <tab></tab>
+        <!-- <tab></tab> -->
     </div>
 </template>
 <script>
 import Vue from 'vue'
 import Tab from '../tabbtn/tab'
-import swiperBox from './swiperbox'
 export default {
     name:'home',
     components:{
-        Tab,swiperBox
+        Tab
     },
     data() {
         return{    
