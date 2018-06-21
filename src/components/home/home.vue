@@ -71,11 +71,14 @@ export default {
         }
     },
     
-    mounted () {
+    beforeCreate () {
         this.getData()
+        
+    },
+    
+    created () {
         console.log(this.homeinfo)
     }
-    
     
 }
 </script>
