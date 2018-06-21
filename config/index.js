@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/xl': {
+        target: 'http://xunlu.dev.mydeertrip.com/',//其实就是让8080去代理到真正的这个域下面去请求
+        changeOrigin: true,
+        pathRewrite: {//让8080去代理请求的时候，把路径中的暗号去去掉
+        '^/xl':''
+        }
+      }
+   },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

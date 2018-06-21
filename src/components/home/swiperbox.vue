@@ -8,9 +8,9 @@
                             <p>{{n.distanceStr}}</p>
                         </div>
                     </div>
-                    <slot></slot>
-                    <p class="title">印度尼西亚{{n.name}}</p>
-                    <p class="recommand">啊啊啊啊啊啊{{n.description15}}</p>
+                    <p class="tag">{{n.tag}}</p>
+                    <p class="title">{{n.groupDetailId}}</p>
+                    <p class="recommand">不不不不不不不不不{{n.description15}}</p>
                 </div>
             </swiper-slide>
         </swiper>
@@ -34,6 +34,7 @@ export default {
     },
     created () {
         this.getInfo()
+        // console.log(this.boxInfo)
     }
 }
 </script>
@@ -41,7 +42,7 @@ export default {
     .promotion_routes{
         background:#ccc;
         .contImg{
-            padding: 0.12rem;
+            padding-left:0.12rem;
         }
         
     }

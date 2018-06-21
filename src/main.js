@@ -18,6 +18,10 @@ import './stylesheets/_reset.scss'
 //rem适配
 import rem from './assets/rem'
 
+//axios
+import axios from 'axios'
+Vue.prototype.$http = axios
+
 // 初始化vue-amap
 AMap.initAMapApiLoader({
   // 申请的高德key
