@@ -38,12 +38,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-    .promotion_routes{
-        background:#ccc;
-        .contImg{
-            padding-left:0.12rem;
-        }
-        
-    }
-</style>
