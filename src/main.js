@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Stort from './store/store'
-
+import lazy from 'vue-lazyload'
 //swiper
 import Swiper from 'vue-awesome-swiper'
 import '../node_modules/swiper/dist/css/swiper.min.css'
@@ -33,6 +33,7 @@ AMap.initAMapApiLoader({
 Vue.use(rem)
 Vue.use(Swiper)
 Vue.use(AMap)
+Vue.use(lazy)
 
 Vue.config.productionTip = false
 
