@@ -2,42 +2,10 @@
     <div class="province">
         <div class="top">
             <back></back>
-            <h2>云南</h2>
+            <h2 @click="this.judgePro">云南{{this.itemId}}</h2>
         </div>
         <div class="cont">
             <div class="imgbox">
-                <img src="" alt="">
-                <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
-                </div>
-            </div>
-            <div class="imgbox">
-                <img src="" alt="">
-                <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
-                </div>
-            </div><div class="imgbox">
-                <img src="" alt="">
-                <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
-                </div>
-            </div><div class="imgbox">
-                <img src="" alt="">
-                <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
-                </div>
-            </div>
-            <div class="imgbox">
-                <img src="" alt="">
-                <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
-                </div>
-            </div><div class="imgbox">
                 <img src="" alt="">
                 <div class="info">
                     <h3>昆明</h3>
@@ -53,6 +21,43 @@ export default {
     name:'province',
     components:{
         back
+    },
+    data (){
+        return{
+            proInfo:[]
+        }
+    },
+    props:['itemId'],
+    methods:{
+        //获取本页面数据
+        getProData(){
+            this.$http.get('http://xunlu.dev.mydeertrip.com/city/show/regions').then(res => {
+                this.datalist=res.data.data
+            })
+            // this.$nexttick(function(){
+            //     console.log('aaaa')
+            // })
+        },
+        //判断省份
+        judgePro(){
+            let Data =this.datalist.regions
+            for(var i in Data){
+               let proData = Data[i].children
+               for(let j in proData){
+                   if(proData[j].id == this.itemId){
+                   console.log(proData[j])
+                   return this.proInfo=proData[j]
+                   }
+                }
+            }
+        }
+    }, 
+    created (){
+        this.getProData()
+        
+    },
+    mounted (){
+        //  this.$nextTick(this.judgePro())
     }
 }
 </script>

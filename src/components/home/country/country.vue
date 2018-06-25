@@ -50,7 +50,7 @@ export default {
     
     methods: {
         //获取本页面数据
-        getProvData(){
+        getCouData(){
             let that = this.groupDetailId
             this.$http.get('http://xunlu.dev.mydeertrip.com/face/group/detail',{
             params:{detailId:that}
@@ -65,7 +65,7 @@ export default {
         }
     },
     created (){
-        this.getProvData()
+        this.getCouData()
     }
     
 }

@@ -2,41 +2,41 @@
     <div class="scenic">
         <div class="scenictop">
             <back></back>
-            <h2>丽江</h2>
+            <h2>{{this.groupDetailName}}</h2>
             <h3>
                 <span class=".swiper-pagination" v-for="n in titles" :key="n.id"
-                :class="isBig(n.num) ? 'big':''" herf="n.num"  @click="changetitle(n.num)">
+                :class="isBig(n.num) ? 'big':''" herf="n.num">
                 {{n.title}}</span>
              </h3>
         </div>
         <swiper class="swiperbox" :options="swiperOption">
             <swiper-slide id="0">
-                <div class="sceniccont">
-                    <img src="a" alt="">
+                <div class="sceniccont" v-for="(n,i) in this.sceList" :key="i" @click="sceClick">
+                    <img :src="n.cover_img" alt="">
                     <div class="title">
-                        <p>虎跳峡</p>
-                        <span>必去</span>
-                        <i>四月峡谷花开</i>
+                        <p>{{n.name}}</p>
+                        <span>{{n.importantStr}}</span>
+                        <i>{{n.description15}}</i>
                     </div>
                     <div class="info">
-                        <p>景点排名第一</p>|
+                        <p>景点排名第{{i+1}}</p>|
                         <span>7480人去过</span>|
-                        <i>2天</i>
+                        <i>{{n.recomTimeStr}}</i>
                     </div>
                     <div class="site">
-                        <p>丽江市</p>|
-                        <span>世界文化遗产·古城</span>
+                        <p>{{n.cityName}}</p>|
+                        <span>无数据</span>
                     </div>
-                    <p class="cont">中国古镇完美典范，背包客大本营</p>
+                    <p class="cont">{{n.description15}}</p>
                 </div>
             </swiper-slide>
             <swiper-slide id="1">
-                <div class="pathcont">
-                    <img src="a" alt="">
-                    <div class="day">3<span>天</span></div>
+                <div class="pathcont" v-for="(n,i) in rouList" :key="i">
+                    <img :src="n.coverImg" alt="">
+                    <div class="day">{{n.dayCount}}<span>天</span></div>
                     <div class="pathinfo">
-                        <p>三大经典纳溪古镇串烧 | 古城</p>
-                        <span>丽江古城束河古镇白沙古镇两日游</span>
+                        <p>{{n.title}}</p>
+                        <span>{{n.subTitle}}</span>
                         <i>68%旅者的选择</i>
                     </div>
                 </div>
@@ -51,10 +51,13 @@ export default {
     components:{
         back
     },
+    props:['groupDetailId','groupDetailName'],
     data () {
         const that = this
         return{
             page:0,
+            sceList:[],
+            rouList:[],
             titles: [
                 {id: 1, title: '景点',num: 0},
                 {id: 2, title: '线路',num: 1}
@@ -63,6 +66,7 @@ export default {
                 slidesPerView: 'auto',
                 resistanceRatio:0,
                 slideTo:that.page,
+                autoHeight:true,
                 pagination: {
                     el: '.swiper-pagination',
                 },
@@ -80,7 +84,36 @@ export default {
         },
         changetitle(num){
            this.page = num
+        },
+        //获取景点列表
+        getSceList(){
+            let that = this.groupDetailId
+            this.$http.get('http://xunlu.dev.mydeertrip.com/plan/sslist',{
+                params:{cursor:1,limit:100,regionIds:that
+                }}).then(res => {
+                    // console.log(res.data.data.regionDetail[0].ssList)
+                    this.sceList = res.data.data.regionDetail[0].ssList
+                })
+        },
+        //获取线路列表
+        getRouList(){
+            let that = this.groupDetailId
+            this.$http.get('http://xunlu.dev.mydeertrip.com/plan/listRoute',{
+                params:{cursor:1,limit:100,regionIds:that
+                }}).then(res => {
+                    console.log(res.data.data.routeList[0].rlist)
+                    this.rouList = res.data.data.routeList[0].rlist
+                })
+        },
+        //点击进入景点
+        sceClick(){
+            console.log('go')
+            this.$router.push({path:'/sceInfo'})
         }
+    },
+    created (){
+        this.getSceList()
+        this.getRouList()
     }
 }
 </script>
@@ -117,11 +150,13 @@ export default {
         }
     }
 }
+.sceniccont:first-child{
+    margin-top:1.3rem
+}
 .sceniccont{
     width: 3.27rem;
     height: 3.09rem;
-    background: #ccc;
-    margin: 1.3rem auto 0;
+    margin: 0.13rem auto 0;
     img{
         width: 100%;
         height: 1.64rem;
@@ -143,7 +178,7 @@ export default {
             background: #FDAD00;
             height: 0.16rem;
             color: #fff;
-            padding: 0.01rem 0.07rem;
+            // padding: 0.01rem 0.07rem;
             margin-right: 0.08rem;
             line-height: 0.16rem;
         }
@@ -153,6 +188,8 @@ export default {
             color: #fff;
             padding: 0.01rem 0.08rem;
             line-height: 0.16rem;
+            overflow: hidden;
+            max-width: 1rem;
         }
     }
    .info{
@@ -202,11 +239,13 @@ export default {
         color: #484848
     }
 }
+.pathcont:first-child{
+    margin-top: 1.3rem
+}
 .pathcont{
     width: 3.27rem;
     height: 3.09rem;
-    background: #ccc;
-    margin: 1.3rem auto 0;
+    margin: 0.13rem auto 0;
     img{
         width: 100%;
         height: 1.64rem;

@@ -20,8 +20,8 @@
             <h2>推荐州省</h2>
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in province" :key= "index">
-                    <div>
-                        <div class="image-box router-box">
+                    <div @click="proclick(n.itemId)">
+                        <div  class="image-box router-box">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -66,7 +66,7 @@
             <h2>文艺旅拍之地</h2>
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in wenyi" :key= "index">
-                    <div>
+                    <div @click="wenclick(n.itemId,n.groupDetailName)">
                         <div class="image-box router-box">
                             <img v-lazy="n.coverImg ">
                         </div>
@@ -157,15 +157,24 @@ export default {
     methods:{
         //国家点击
         couclick(id){
-            console.log(id)
             this.$router.push({path:'/country/'+id})
+        },
+        //省份点击
+        proclick(id){          
+            this.$router.push({path:'/province/'+id})
+            console.log(id)
+        },
+        //景点点击(文艺)
+        wenclick(id,name){
+            console.log(name)
+            this.$router.push({path:'/scenic/'+id+'/'+name})
         },
         //获取数据
         getHomeData(){
             this.$http.get('xl/face/list').then(res => {
                 this.homeinfo = res.data.data.faceList
                 this.country = this.homeinfo[0].detailList//国家
-                console.log(this.country)
+                // console.log(this.country)
                 this.province = this.homeinfo[1].detailList//州省
                 this.hot = this.homeinfo[2].detailList//热门（境外旅行）
                 this.jingdian = this.homeinfo[9].detailList//经典(全球达人路线)
