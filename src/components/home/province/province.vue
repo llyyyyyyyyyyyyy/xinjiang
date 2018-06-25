@@ -2,14 +2,14 @@
     <div class="province">
         <div class="top">
             <back></back>
-            <h2 @click="this.judgePro">云南{{this.itemId}}</h2>
+            <h2 @click="this.judgePro">{{this.proInfo.name}}</h2>
         </div>
         <div class="cont">
-            <div class="imgbox">
-                <img src="" alt="">
+            <div class="imgbox" v-for="(n,i) in proInfo.regions" :key="i">
+                <img :src="n.img" alt="">
                 <div class="info">
-                    <h3>昆明</h3>
-                    <p>翠湖·滇池·云南民族村·筇 竹寺</p>
+                    <h3>{{n.name}}</h3>
+                    <p>{{n.cityStr}}</p>
                 </div>
             </div>
         </div>
@@ -24,7 +24,8 @@ export default {
     },
     data (){
         return{
-            proInfo:[]
+            proInfo:[],
+            datalist:[]
         }
     },
     props:['itemId'],
@@ -32,11 +33,9 @@ export default {
         //获取本页面数据
         getProData(){
             this.$http.get('http://xunlu.dev.mydeertrip.com/city/show/regions').then(res => {
-                this.datalist=res.data.data
+                this.datalist=res.data.data;
+                this.judgePro()
             })
-            // this.$nexttick(function(){
-            //     console.log('aaaa')
-            // })
         },
         //判断省份
         judgePro(){
@@ -54,10 +53,9 @@ export default {
     }, 
     created (){
         this.getProData()
-        
     },
     mounted (){
-        //  this.$nextTick(this.judgePro())
+        //  
     }
 }
 </script>
@@ -82,7 +80,6 @@ export default {
     .cont{
         margin:1.06rem 0 0 0.24rem;
         padding-top:0.24rem;
-        background: #ccc;
         .imgbox{
             height: 2.36rem;
             width: 1.58rem;
@@ -90,6 +87,11 @@ export default {
             position: relative;
             float: left;
             margin: 0 0.14rem 0.13rem 0;
+            img{
+                width: 100%;
+                height: 2.36rem;
+                overflow: hidden;
+            }
             .info{
                 height: 1.11rem;
                 box-sizing: border-box;
@@ -97,7 +99,6 @@ export default {
                 padding:0.38rem 0.1rem 0.1rem 0.15rem;
                 position: absolute;
                 bottom: 0;
-                background: #484848;
                 color: #fff;
                 h3{
                     font-size: 0.17rem;
