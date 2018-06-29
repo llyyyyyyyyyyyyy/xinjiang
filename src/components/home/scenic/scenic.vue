@@ -1,37 +1,42 @@
 <template>
-    <div class="scenic">
+    <div class="rouInfo">
         <div class="scenictop">
             <back></back>
             <h2>{{this.groupDetailName}}</h2>
             <h3>
-                <span class=".swiper-pagination" v-for="n in titles" :key="n.id"
-                :class="isBig(n.num) ? 'big':''" herf="n.num">
+                <span v-for="n in titles" :key="n.id"
+                :class="isBig(n.num) ? 'big':''" @click="h3Click(n.num)">
                 {{n.title}}</span>
              </h3>
         </div>
-        <swiper class="swiperbox" :options="swiperOption">
-            <swiper-slide id="0">
-                <div class="sceniccont" v-for="(n,i) in this.sceList" :key="i" @click="sceClick">
-                    <img :src="n.cover_img" alt="">
-                    <div class="title">
-                        <p>{{n.name}}</p>
-                        <span>{{n.importantStr}}</span>
-                        <i>{{n.description15}}</i>
+        <div class="swiper-container swiperbox">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="sceniccont" v-for="(n,i) in this.sceList" :key="i" @click="sceClick">
+                        <img :src="n.cover_img" alt="">
+                        <div class="title">
+                            <p>{{n.name}}</p>
+                            <div class="recommand">
+                                <span v-for="(i,a) in n.natureList" :key="i.id" v-if="a<3"> · {{i.value}}</span>
+                            </div> 
+                        </div>
+                        <div class="info">
+                            <p>景点排名第{{i+1}}</p>|
+                            <span>评分{{n.score}}</span>
+                        </div>
+                        <div class="site">
+                            <div class="recommand">
+                                <span v-for="(i,a) in n.preferList" :key="i.id" v-if="a<3"> · {{i.value}}</span>
+                            </div>|
+                            <i>推荐游玩{{n.recomTimeStr}}</i>
+                        </div>
+                        <div class="impression">
+                            <p><span>印象：</span>{{n.description15}}</p>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p>景点排名第{{i+1}}</p>|
-                        <span>7480人去过</span>|
-                        <i>{{n.recomTimeStr}}</i>
-                    </div>
-                    <div class="site">
-                        <p>{{n.cityName}}</p>|
-                        <span>无数据</span>
-                    </div>
-                    <p class="cont">{{n.description15}}</p>
                 </div>
-            </swiper-slide>
-            <swiper-slide id="1">
-                <div class="pathcont" v-for="(n,i) in rouList" :key="i">
+                <div class="swiper-slide">
+                    <div class="pathcont" v-for="(n,i) in rouList" :key="i">
                     <img :src="n.coverImg" alt="">
                     <div class="day">{{n.dayCount}}<span>天</span></div>
                     <div class="pathinfo">
@@ -40,50 +45,52 @@
                         <i>68%旅者的选择</i>
                     </div>
                 </div>
-            </swiper-slide>
-        </swiper>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
     </div>
 </template>
 <script>
+import Swiper from 'swiper'
+import { Indicator } from 'mint-ui'
 import back from '../../common/back'
 export default {
-    name: 'scenic',
-    components:{
-        back
-    },
-    props:['groupDetailId','groupDetailName'],
-    data () {
-        const that = this
+    components:{Swiper,back},
+     props:['groupDetailId','groupDetailName'],
+    data (){
         return{
-            page:0,
-            sceList:[],
-            rouList:[],
             titles: [
                 {id: 1, title: '景点',num: 0},
                 {id: 2, title: '线路',num: 1}
             ],
-            swiperOption:{
-                slidesPerView: 'auto',
-                resistanceRatio:0,
-                slideTo:that.page,
-                autoHeight:true,
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-                on :{//轮播图下标获取
-                    transitionEnd:function(){
-                        that.page = this.activeIndex
-                    }
-                }
-            }
+            page:0,
+            sceList:[],
+            rouList:[]
         }
     },
-    methods: {
+    methods:{
         isBig(i){
             return i - this.page == 0 
         },
-        changetitle(num){
-           this.page = num
+        h3Click(i){
+            this.mySwiper.slideTo(i,900,false);
+            this.page = this.mySwiper.activeIndex
+            
+        },
+        //初始化Swiper
+        initSwiper(){
+            let that = this
+            this.mySwiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto', // 去掉可以将图片 横向 铺满屏幕
+            centeredSlides: true,
+            autoHeight:true,
+            resistanceRatio:0,
+            onSlideChangeEnd() {
+                that.page = that.mySwiper.activeIndex;
+                }
+            })
         },
         //获取景点列表
         getSceList(){
@@ -93,6 +100,7 @@ export default {
                 }}).then(res => {
                     // console.log(res.data.data.regionDetail[0].ssList)
                     this.sceList = res.data.data.regionDetail[0].ssList
+                    Indicator.close()
                 })
         },
         //获取线路列表
@@ -101,8 +109,9 @@ export default {
             this.$http.get('http://xunlu.dev.mydeertrip.com/plan/listRoute',{
                 params:{cursor:1,limit:100,regionIds:that
                 }}).then(res => {
-                    console.log(res.data.data.routeList[0].rlist)
-                    this.rouList = res.data.data.routeList[0].rlist
+                    //console.log(res.data.data.routeList[0].rlist)
+                   this.rouList = res.data.data.routeList[0].rlist
+                     
                 })
         },
         //点击进入景点
@@ -112,8 +121,12 @@ export default {
         }
     },
     created (){
+         Indicator.open()
         this.getSceList()
         this.getRouList()
+    },
+    mounted (){
+        this.initSwiper()
     }
 }
 </script>
@@ -157,6 +170,7 @@ export default {
     width: 3.27rem;
     height: 3.09rem;
     margin: 0.13rem auto 0;
+    overflow: hidden;
     img{
         width: 100%;
         height: 1.64rem;
@@ -167,29 +181,20 @@ export default {
         color: #383838;
         margin:0.13rem 0 0.08rem;
         display: flex;
-        align-items: center;
+        align-items: center; 
         p{
             height: 0.24rem;
             font-size: 0.17rem;
             font-weight: 900;
-            margin-right: 0.12rem;
+            padding-right: 0.12rem;
+            z-index: 2;
+            background: #fff
         }
-        span{
-            background: #FDAD00;
-            height: 0.16rem;
-            color: #fff;
-            // padding: 0.01rem 0.07rem;
-            margin-right: 0.08rem;
-            line-height: 0.16rem;
-        }
-        i{
-            background: #119DFF;
-            height: 0.16rem;
-            color: #fff;
-            padding: 0.01rem 0.08rem;
-            line-height: 0.16rem;
+        .recommand{
+            margin-left:-0.05rem;
+            color: #DD8200;
+            font-size: 0.12rem;
             overflow: hidden;
-            max-width: 1rem;
         }
     }
    .info{
@@ -209,12 +214,6 @@ export default {
             line-height: 0.16rem;
             color: #3FA9FF;
         }
-        i{
-            height: 0.16rem;
-            color: #484848;
-            padding: 0.01rem 0.08rem;
-            line-height: 0.16rem;
-        }
      }
     .site{
         height: 0.18rem;
@@ -224,20 +223,29 @@ export default {
         align-items: center;
         line-height: 0.18rem;
         margin: 0.06rem 0 0.04rem;
-        p{
-            margin-right: 0.08rem;
+        .recommand{
+            margin:0 0.1rem 0 -0.05rem;
+            color: #666666;
+            font-size: 0.12rem;
+            overflow: hidden;
         }
-        span{ 
+        i{ 
             height: 0.16rem;
             margin:0 0.08rem;
             line-height: 0.16rem;
         }
     }
-    .cont{
+    .impression{
         font-size: 0.13rem;
         line-height: 0.18rem;
-        color: #484848
+        color: #484848;
+        p{
+            span{
+                color: #119DFF
+            }
+        }
     }
+
 }
 .pathcont:first-child{
     margin-top: 1.3rem

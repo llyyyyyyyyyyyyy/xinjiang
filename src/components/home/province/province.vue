@@ -5,7 +5,7 @@
             <h2 @click="this.judgePro">{{this.proInfo.name}}</h2>
         </div>
         <div class="cont">
-            <div class="imgbox" v-for="(n,i) in proInfo.regions" :key="i">
+            <div class="imgbox" v-for="(n,i) in proInfo.regions" :key="i" @click="toSce(n.id,n.name)">
                 <img :src="n.img" alt="">
                 <div class="info">
                     <h3>{{n.name}}</h3>
@@ -17,6 +17,7 @@
 </template>
 <script>
 import back from '../../common/back'
+import { Indicator } from 'mint-ui'
 export default {
     name:'province',
     components:{
@@ -34,7 +35,9 @@ export default {
         getProData(){
             this.$http.get('http://xunlu.dev.mydeertrip.com/city/show/regions').then(res => {
                 this.datalist=res.data.data;
-                this.judgePro()
+                this.judgePro() 
+                Indicator.close();
+
             })
         },
         //判断省份
@@ -49,9 +52,13 @@ export default {
                    }
                 }
             }
+        },
+        toSce(id,name){
+            this.$router.push({path:'/scenic/'+id+'/'+name})
         }
     }, 
     created (){
+        Indicator.open()
         this.getProData()
     },
     mounted (){
@@ -83,7 +90,6 @@ export default {
         .imgbox{
             height: 2.36rem;
             width: 1.58rem;
-            background: pink;
             position: relative;
             float: left;
             margin: 0 0.14rem 0.13rem 0;

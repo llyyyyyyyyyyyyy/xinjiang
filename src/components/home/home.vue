@@ -6,7 +6,7 @@
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in country" :key= "index" >
                     <div @click="couclick(n.groupDetailId)">
-                        <div class="image-box router-box">
+                        <div class="image-box">
                             <img v-lazy= "n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -21,7 +21,7 @@
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in province" :key= "index">
                     <div @click="proclick(n.itemId)">
-                        <div  class="image-box router-box">
+                        <div  class="image-box">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -36,7 +36,7 @@
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in hot" :key= "index">
                     <div>
-                        <div class="image-box router-box">
+                        <div class="image-box" @click="proclick(n.itemId)">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -49,9 +49,9 @@
         <div class="jingdian">
             <h2>经典旅行线路</h2>
             <swiper class="swiperbox" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in jingdian" :key= "index">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in jingdian" :key= "index" >
                     <div>
-                        <div class="image-box router-box">
+                        <div class="image-box" @click="toRouter(n)">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
@@ -67,7 +67,7 @@
             <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in wenyi" :key= "index">
                     <div @click="wenclick(n.itemId,n.groupDetailName)">
-                        <div class="image-box router-box">
+                        <div class="image-box">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -80,9 +80,9 @@
         <div class="strategy">
             <h2>旅行攻略</h2>
             <swiper class="swiperbox" :options="swiperOption">
-            <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in strategy" :key= "index">
+            <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in strategy" :key= "index" v-if="index<5">
                 <div>
-                    <div class="image-box router-box">
+                    <div class="image-box">
                         <img v-lazy="n.cover_img + '-GDcreateroute3.ht'">
                         <div class="image-tag">
                             <p>{{n.distanceStr}}</p>
@@ -100,7 +100,7 @@
            <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in best" :key= "index">
                     <div>
-                        <div class="image-box router-box">
+                        <div class="image-box">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
@@ -116,7 +116,7 @@
            <swiper class="swiperbox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in zhuanti" :key= "index">
                     <div>
-                        <div class="image-box router-box">
+                        <div class="image-box">
                             <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
@@ -133,10 +133,11 @@
 <script>
 import Vue from 'vue'
 import Tab from '../tabbtn/tab'
+import { Indicator } from 'mint-ui';
 export default {
     name:'home',
     components:{
-        Tab
+        Tab,
     },
     data() {
         return{    
@@ -169,6 +170,11 @@ export default {
             console.log(name)
             this.$router.push({path:'/scenic/'+id+'/'+name})
         },
+        //线路点击
+        toRouter(id){
+            console.log(id)
+            this.$router.push({path:'/routerInfo'})
+        },
         //获取数据
         getHomeData(){
             this.$http.get('xl/face/list').then(res => {
@@ -181,9 +187,13 @@ export default {
                 this.wenyi = this.homeinfo[3].detailList//文艺（花色浪漫旅拍）
                 this.best = this.homeinfo[18].detailList//极致体验
                 this.zhuanti = this.homeinfo[19].detailList//专题游记
+                Indicator.close()
             })
         }
     }, 
+    created(){
+        Indicator.open()
+    },
     mounted () {
         this.getHomeData()   
     },
@@ -202,9 +212,9 @@ export default {
                 width: 100%;
                 height: auto;
             }
-        }
-        
+        }    
     }
+    
 #home{
     padding:0.54rem 0 0.49rem;
     .country{
@@ -227,8 +237,7 @@ export default {
         .contImg{
             width: 2.5rem;
             .image-box{
-                height: 2.5rem;     
-                background: pink;
+                height: 2.5rem;     ;
             }
             .title{
                 font-size: 0.15rem;
@@ -259,7 +268,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.28rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -289,8 +297,7 @@ export default {
         .contImg{
             width: 1.58rem ;
             .image-box{
-                height: 2.36rem;     
-                background: pink;
+                height: 2.36rem;     ;
                 overflow: hidden;
                 img{
                     width: auto;
@@ -327,7 +334,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;
@@ -369,7 +375,6 @@ export default {
             width: 1.58rem ;
             .image-box{
                 height: 0.89rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -401,7 +406,6 @@ export default {
             width: 1rem ;
             .image-box{
                 height: 1.5rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -430,7 +434,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;
@@ -471,7 +474,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;

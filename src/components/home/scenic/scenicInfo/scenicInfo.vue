@@ -1,61 +1,145 @@
 <template>
     <div class="sceInfo">
         <back></back>
+        <!--头部-->
         <header>
             <div class="img-box">
-                <img src="a" alt="">
+                <img :src="this.sceInfoData.top_img" alt="">
             </div>
-            <h2>玉龙雪山</h2>
-            <h3>Yulong Snow Mountain</h3>
-            <h4><i>景点排名第1</i>|<span>评分 8.5</span></h4>
+            <h2>{{this.sceInfoData.name}}</h2>
+            <h3>{{this.sceInfoData.enName}}</h3>
+            <h4><i>景点排名第{{this.sceInfoData.type}}</i>|<span>评分 8.5</span></h4>
             <h5><i>银座 · 东京塔</i>|<span>推荐游玩 1 天</span></h5>
             <h6>亲子 · 摄影 · 秘境</h6>
         </header>
         <main>
+            <!--简介-->
             <div class="title">
                 <div class="k"></div>
                 <h3>速写</h3>
             </div>
             <div class="skeInfo pSty">
-                <p><span>印象：</span>走进泸沽湖，如同进入了一个异境世界：群山围绕湛蓝的湖水，浪漫又勤劳的摩梭人至今还沿袭着母系氏族社会的走婚习俗，探险家约瑟夫·洛克称赞这里是神仙居住的地方。徒步或骑单车环湖，累了到摩梭人家喝杯茶、聊聊天，坐上猪槽船看清晨日出，听一曲摩梭山歌，参加夜晚村寨里的甲搓舞篝火晚会，“东方女儿国”叫人乐不思蜀。</p>
+                <p><span>印象：</span>{{this.sceInfoData.description150}}</p>
             </div>
-            <div class="intrp pSty">
-                <p><span>简介</span>位于四川省凉山彝族自治州盐源县与云南省丽江市宁蒗彝族自治县之间的泸沽湖，是</p>
-                <div class="unfold">查看更多</div>
+            <div class="intrp pSty" ref="intrp">
+                <p ><span>简介</span>{{this.sceInfoData.guideIntro}}</p>
+                <div class="unfold" ref="unfold" @click="moreIntry()">查看更多</div>
             </div>
             <div class="title">
                 <div class="k"></div>
                 <h3>子景点</h3>
-            </div>
-            <div class="sce">
-
-            </div>
+            </div> 
+            <swiper class="swiperbox sce" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for="(n,index) in this.sceInfoData.imgList" :key="index" v-if='index<=3'>
+                    <div>
+                        <div class="image-box">
+                            <img :src="n.img">
+                        </div>
+                        <p class="name">宁蒗彝族自治县</p>
+                        <p class="recommand">半岛 · 乡村 · 湖湾</p>
+                    </div>
+                </swiper-slide>
+            </swiper>
+            
             <div class="title">
                 <div class="k"></div>
                 <h3>玩法</h3>
             </div>
-            <div class="play">
-
-            </div>
+            <swiper class="swiperbox play" :options="swiperOption" >
+                <swiper-slide class="contImg" ref="tab" v-for="n in this.sceInfoData.playList" :key="n.id">
+                    <div>
+                        <div class="image-box">
+                            <img :src="n.topImg">
+                        </div>
+                        <p class="name">{{n.name}}</p>
+                        <p class="recommand">
+                            <span v-for="(i,a) in n.preferPlayList" :key="i.id" v-if="a<3"> · {{i.value}}</span>
+                        </p>           
+                    </div>
+                </swiper-slide>
+            </swiper>
             <div class="title">
                 <div class="k"></div>
                 <h3>实用信息</h3>
             </div>
             <div class="map">
-
+                <el-amap ref="map" vid="amapDemo" :dragEnable="dragEnable" :zoomEnable='zoomEnable' :zoom="zoom" :center="this.center" v-if="this.mapOk">
+                    <el-amap-marker vid="component-marker" :position="marker.position"  ></el-amap-marker>
+                </el-amap>
             </div>
             <div class="practical">
                 <h4>
-                    <img src="" alt="" style="background:black">
+                    <img src="../../../../assets/images/scenicInfo/地址 (1)@3x.png" alt="">
                     <span>地址</span>
-                    <i>云南省丽江市宁蒗县永宁乡境内</i>
+                    <i>{{this.sceInfoData.guideAddress}}</i>
                 </h4>
                 <h4>
-                    <img src="" alt="" style="background:black">
+                    <img src="../../../../assets/images/scenicInfo/景点门票@3x.png" alt="" >
                     <span>门票</span>
-                    <i>免费参观；语音导游设备有中、英、韩、法、德、俄、日等语种</i>
+                    <i>{{this.sceInfoData.guideTicket}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/开放时间@3x.png" alt="">
+                    <span>开放</span>
+                    <i>{{this.sceInfoData.guideOpenTime}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/交通 copy@3x.png" alt="">
+                    <span>交通</span>
+                    <i>{{this.sceInfoData.guideTraffic}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/房子 copy@3x.png" alt="">
+                    <span>住宿</span>
+                    <i>{{this.sceInfoData.guideStay}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/灯泡@3x.png" alt="">
+                    <span>贴士</span>
+                    <i>{{this.sceInfoData.guideTips}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/网址@3x.png" alt="">
+                    <span>网站</span>
+                    <i>{{this.sceInfoData.guideWebsite}}</i>
+                </h4>
+                <h4>
+                    <img src="../../../../assets/images/scenicInfo/电话@3x.png" alt="">
+                    <span>电话</span>
+                    <i>{{this.sceInfoData.guidePhone}}</i>
                 </h4>
             </div>
+            <div class="title">
+                <div class="k"></div>
+                <h3>景点评论</h3>
+            </div>
+            <div class="comment" v-for="n in this.commentData" :key="n.id">
+                <h5>
+                    <img :src="n.photo" alt="">
+                    <span>{{n.nickName}}</span>
+                    <i>{{n.createTime}}</i>
+                </h5>
+                <p class=".cont">
+                    {{n.commentDesp}}
+                </p>
+                <img class="pic" :src="n.imgList.imgUrl" alt="">
+                <p class="more">查看全部精彩评论   ></p>
+            </div>
+            <div class="title">
+                <div class="k"></div>
+                <h3>附近景点</h3>
+            </div>
+            <swiper class="swiperbox near" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for="n in this.nearData" :key="n.id">
+                    <div >
+                        <div class="image-box">
+                            <img :src="n.img ">
+                        </div>
+                        <p class="name">{{n.name}}</p>
+                        <p class="recommand">距离{{n.score}}km</p>
+                    </div>
+                </swiper-slide>
+            </swiper>
         </main>
     </div>
 </template>
@@ -68,24 +152,101 @@ export default {
     },
     data(){
         return{
-
+            sceInfoData:[],//景点详情
+            commentData:[],
+            nearData:[],
+            swiperOption:{
+                slidesPerView: 'auto'
+            },
+            //高德地图配置
+            zoom: 12,
+            dragEnable: false,
+            zoomEnable:false,
+            mapOk: false,
+            center: [],//中心点
+            marker: {   //点标记
+                position: [0,0]
+            },
+            
+            
         }
+    },
+    methods: {
+        //获取景点详情
+        getSceInfoData(){
+            this.$http.get('http://xunlu.dev.mydeertrip.com/scenic_spots/guide',{
+            params:{id:10772,beginDate:'2018-06-20',dayCount:1,token:''}
+      }).then(res => {
+                this.sceInfoData = res.data.data.ss
+                this.center = [this.sceInfoData.longitude,this.sceInfoData.latitude]
+                this.marker.position = this.center
+                this.mapOk = true
+                this.getNear()
+            })
+        },
+        //获取评论
+        getComment(){
+            this.$http.get('http://xunlu.dev.mydeertrip.com:86/comment/list',{
+                params:{qType:'all',itemId:10772,start:0,limit:3,userId:2911,isCream:0}
+            }).then(res=>{
+                this.commentData =  res.data.data.list
+            })
+        },
+        //附近景点
+        getNear(){
+            this.$http.get('http://xunlu.dev.mydeertrip.com/scenic_spots/listNearbyss',{
+                params:{lat:this.sceInfoData.longitude,lon:this.sceInfoData.latitude,ssId:10772}
+            }).then(res=>{
+                console.log(res)
+                this.nearData = res.data.data.list
+            })
+        },
+        moreIntry () {
+            
+            if(this.$refs.unfold.innerHTML =='查看更多'){
+                this.$refs.intrp.style.height = 'auto'
+                this.$refs.unfold.innerHTML ='收起内容'}
+            else{
+                this.$refs.intrp.style.height = '0.46rem'
+                this.$refs.unfold.innerHTML ='查看更多'
+            }
+        }
+    },
+    created (){
+        this.getSceInfoData()
+        this.getComment()
+        
     }
 }
 </script>
 <style lang="scss" scoped>
+.swiperbox{
+        .contImg{
+            margin-left:0.12rem;
+            .image-box{
+                overflow: hidden;
+            }
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }    
+    }
 .sceInfo{
     .back{
         margin-left:0.24rem
     }
     header{
-        background: #ccc;
         width: 3.27rem;
         margin: 0.34rem auto 0.4rem;
         .img-box{
             height: 3.27rem;
             width: 3.27rem;
-            background: pink;
+            overflow: hidden;
+            img{
+                width: auto;
+                height: 100%;
+            }
         }
         h2{
             color: #484848;
@@ -131,9 +292,9 @@ export default {
     main{
         width: 3.33rem;
         margin: 0 auto;
-        background: #ccc;
         .title{
             line-height: 0.24rem;
+            margin-bottom: 0.19rem;
             .k{
                 width: 0.03rem;
                 height: 0.12rem;
@@ -161,39 +322,58 @@ export default {
             width: 3.33rem;
             height: 0.46rem;
             position: relative;
+            overflow: hidden;
+            
         }
         .unfold{
             position: absolute;
-            top:0.25rem;
-            left: 2.66rem;
+            bottom:0rem;
+            left: 2.75rem;
             color: #119DFF;
             font-size: 0.14rem;
+            background: #fff
         }
         .sce{
-            width: 1.58rem;
             height: 2.73rem;
-            background: pink;
+            .contImg{
+               width: 1.58rem;  
+            }
+            img{
+                width: 1.58rem;
+                height: 1.58rem;
+            }
         }
         .play{
             height: 2.76rem;
-            width: 3.27rem;
-            background: pink;
+        .contImg{
+            overflow: hidden;
+        }
+            img{
+                width: 3.27rem;
+                height: 1.64rem;
+                background: pink;
+            }
+           .recommand{
+               margin-left:-0.05rem;
+           }
         }
         .map{
             height: 1.09rem;
             width: 3.27rem;
-            background: pink;
-
         }
         .practical{
+            margin-bottom: 0.16rem;
+            
             h4{
                 margin-top:0.3rem;
                 line-height: 0.21rem;
                 img{
-                display: inline-block;
-                width: 0.14rem;
-                height: 0.14rem;
-                float: left;
+                    padding-top: 0.04rem;
+                    display: inline-block;
+                    vertical-align:middle;
+                    width: 0.14rem;
+                    height: 0.14rem;
+                    float: left;
                 }
                 span{
                     display: inline-block;
@@ -206,6 +386,68 @@ export default {
                     max-width: 2.62rem;
                     min-height: 0.21rem;
                 }
+            }
+        }
+        .comment{
+            font-size:0.15rem;
+            line-height: 0.21rem;
+            color: #484848;
+            margin:0.36rem 0 0  0.48rem;
+            h5{
+                img{
+                    margin-left: -0.48rem;
+                    height: 0.4rem;
+                    width: 0.4rem;
+                    border-radius: 0.2rem;
+                    display: inline-block;
+                    float: left;
+                    margin-right: 0.08rem;
+                }
+                span{
+                    display: inline-block;
+                    width: 2.5rem;
+                    font-weight: 900;
+                }
+                i{
+                    display: inline-block;
+                    font-size: 0.12rem;
+                    line-height: 0.17rem;
+                }
+            }
+            .cont{
+                width: 2.79rem;
+                height: 0.84rem;
+                margin-top:0.08rem;
+            }
+            .pic{
+                width: 0.88rem;
+                height: 0.88rem;
+                margin:0.16rem 0.09rem 0.35rem 0;
+                display: inline-block;
+                
+            }
+            .more{
+                color: #119DFF;
+                font-size: 0.14rem;
+                line-height: 0.24rem;
+                margin-bottom: 0.4rem;
+            }
+            
+        }
+        .near{
+               height: 2rem;
+               color: #484848;
+               
+            .contImg{
+                width: 1.20rem;
+            }
+            img{
+                width: 1.20rem;
+                height: 1.20rem;
+            }
+            .name{
+                font-weight: 900;
+
             }
         }
     }

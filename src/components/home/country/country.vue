@@ -7,7 +7,7 @@
             <swiper class="swiperbox" :options="swiperOption" >
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in datalist" :key="index" >
                     <div>
-                        <div class="image-box router-box">
+                        <div class="image-box">
                             <img :src= "n.headImg" @click="provpage(n.provinceId)">
                         </div>
                     </div>
@@ -26,6 +26,7 @@
 </template>
 <script>
 import back from '../../common/back'
+import { Indicator } from 'mint-ui';
 export default {
     name: 'prov',
     props:['groupDetailId'],
@@ -57,6 +58,7 @@ export default {
       }).then(res => {
                 console.log(res.data.data.detail)
                 this.datalist=res.data.data.detail
+                Indicator.close();
             })
         },
         //获取id
@@ -65,6 +67,7 @@ export default {
         }
     },
     created (){
+        Indicator.open();
         this.getCouData()
     }
     
