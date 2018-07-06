@@ -1,0 +1,91 @@
+#poi ul {
+  padding-left: 0.11rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+#poi ul li {
+  margin-left: 0.12rem;
+  margin-top: 0.24rem;
+  position: relative;
+}
+#poi ul li img {
+  width: 1.58rem;
+  height: 1.58rem;
+  border-radius: 0.05rem;
+  z-index: 1;
+}
+#poi ul li div p {
+  margin-top: 0.05rem;
+  font-size: 0.15rem;
+  color: #484848;
+}
+#poi ul li div .num {
+  font-size: 0.13rem;
+}
+#poi ul li div .tag {
+  color: #FDAD00;
+  font-size: 0.1rem;
+  line-height: 0.08rem;
+}
+#poi ul li div .tag .t {
+  display: inline-block;
+  color: #119DFF;
+  border-right: 0.01rem solid #119DFF;
+  height: 0.08rem;
+  padding-right: 0.05rem;
+  margin-right: 0.03rem;
+}
+#poi ul li div .tag > .tags:last-child i {
+  display: none;
+}
+#poi ul li input[type="checkbox"] {
+  display: inline-block;
+  width: 0.24rem;
+  height: 0.24rem;
+  display: none;
+  border: none;
+  border: 0.01rem solid red;
+  z-index: 111;
+  position: absolute;
+  right: 0.14rem;
+}
+#poi ul li [id^="checkbox-0-"] + label,
+#poi ul li [id^="checkbox-1-"] + label {
+  display: inline-block;
+  width: 0.24rem;
+  height: 0.24rem;
+  background-image: url(../../../assets/images/add.png);
+  background-repeat: no-repeat;
+  background-size: 0.24rem 0.24rem;
+  background-position: 0rem 0rem;
+  position: absolute;
+  top: -0.08rem;
+  right: 0.14rem;
+}
+#poi ul li [id^="checkbox-0-"]:checked + label,
+#poi ul li [id^="checkbox-1-"]:checked + label {
+  width: 0.24rem;
+  height: 0.24rem;
+  background-image: url(../../../assets/images/yes.png);
+  background-repeat: no-repeat;
+  background-size: 0.24rem 0.24rem;
+  background-position: 0rem 0rem;
+  position: absolute;
+  top: -0.08rem;
+  right: 0.14rem;
+}
+#poi > p {
+  border-left: 0.03rem solid #119DFF;
+  height: 0.12rem;
+  line-height: 0.12rem;
+  margin-top: 0.3rem;
+  margin-left: 0.24rem;
+  padding-left: 0.08rem;
+  margin-bottom: 0.03rem;
+  font-size: 0.13rem;
+  color: #848484;
+}
+#poi > p span {
+  color: #FDAD00;
+}

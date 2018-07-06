@@ -1,0 +1,109 @@
+#setPreferences .title {
+  padding: 0.14rem 0.24rem;
+  border-bottom: 0.01rem solid #eee;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 111;
+}
+#setPreferences .title span {
+  font-size: 0.24rem;
+  color: #484848;
+  margin-right: 0.28rem;
+}
+#setPreferences .title .choose {
+  font-size: 0.14rem;
+  color: #484848;
+}
+#setPreferences ul {
+  padding: 0.61rem 0.18rem 0.9rem 0.18rem;
+}
+#setPreferences ul li > p {
+  border-left: 0.03rem solid #119DFF;
+  margin: 0.32rem 0 0.37rem 0;
+  color: #484848;
+  font-size: 0.15rem;
+  padding-left: 0.15rem;
+}
+#setPreferences ul li > div {
+  width: 1.58rem;
+  height: 1.75rem;
+  display: inline-block;
+  margin: 0.05rem;
+  box-shadow: 0px 0px 10px 2px #eee;
+  border-radius: 0.03rem;
+  text-align: center;
+  position: relative;
+}
+#setPreferences ul li > div img {
+  width: 0.66rem;
+  margin: 0 auto;
+  margin-top: 0.22rem;
+}
+#setPreferences ul li > div p {
+  padding: 0 0.1rem;
+  color: #848484;
+  font-size: 0.12rem;
+  line-height: 0.17rem;
+}
+#setPreferences ul li > div span {
+  padding: 0.12rem 0 0.05rem 0;
+  color: #484848;
+  font-size: 0.13rem;
+}
+#setPreferences ul li > div input[type="radio"] {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#setPreferences ul li > div [id^="checkbox-0-"] + label,
+#setPreferences ul li > div [id^="checkbox-1-"] + label,
+#setPreferences ul li > div [id^="checkbox-2-"] + label {
+  padding: 9px;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#setPreferences ul li > div [id^="checkbox-0-"]:checked + label,
+#setPreferences ul li > div [id^="checkbox-1-"]:checked + label,
+#setPreferences ul li > div [id^="checkbox-2-"]:checked + label {
+  width: 95%;
+  height: 95%;
+  background-image: url(../../../../assets/images/yes.png);
+  background-repeat: no-repeat;
+  background-size: 12%;
+  background-position: 1.45rem 0rem;
+  position: absolute;
+  left: 0;
+  top: -0.08rem;
+}
+#setPreferences > div {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 0.8rem;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#setPreferences > div .btn {
+  width: 3.27rem;
+  height: 0.5rem;
+  background: #119DFF;
+  color: #fff;
+  font-size: 0.15rem;
+  text-align: center;
+  line-height: 0.5rem;
+  border-radius: 0.05rem;
+}

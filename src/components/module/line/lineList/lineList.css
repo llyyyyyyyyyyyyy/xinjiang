@@ -1,0 +1,45 @@
+#list {
+  padding: 0 0.24rem;
+}
+#list .lists {
+  margin-top: 0.24rem;
+}
+#list .lists .imgs {
+  border-radius: 0.1rem;
+  overflow: hidden;
+}
+#list .lists .imgs img {
+  width: 100%;
+}
+#list .lists .conts .contsLeft {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.13rem;
+  line-height: 0.18rem;
+}
+#list .lists .conts .contsLeft .cont {
+  padding-left: 0.16rem;
+  margin-left: 0.16rem;
+  border-left: 0.01rem solid #848484;
+  margin-top: 0.13rem;
+  margin-bottom: 0.1rem;
+  line-height: 0.19rem;
+}
+#list .lists .conts .contsLeft .cont .title {
+  font-size: 0.17rem;
+  color: #383838;
+  line-height: 0.24rem;
+}
+#list .lists .conts .contsLeft .cont .sub {
+  color: #119DFF;
+}
+#list .lists .conts .contsLeft .days {
+  font-size: 0.46rem;
+  line-height: 0.4rem;
+}
+#list .lists .conts .contsLeft .days small {
+  font-size: 0.13rem;
+  align-items: flex-end;
+  line-height: 0.13rem;
+}

@@ -1,5 +1,5 @@
 <template>
-    <ul class="tabs">
+    <ul class="tabs" v-if="false">
         <li v-for="(tab,index) in tabs"  @click="myClick(index)" :class="tab.isHigh ? '':'clickIcon'" :key = "index">
             <a>
                 <img  :src="tab.isHigh ? tab.tabImg : tab.tabHigh" :class="index==2 ? 'bigTab' : ''" >
@@ -27,11 +27,11 @@ export default {
                     isHigh:true,
                 },
                 {
-						tabImg:require('../../assets/images/tabicons/add.png'),
-						tabHigh:require('../../assets/images/tabicons/add.png'),
-						paths:'/add',
-						isHigh:true,
-					},
+					tabImg:require('../../assets/images/tabicons/add.png'),
+					tabHigh:require('../../assets/images/tabicons/add.png'),
+					paths:'/add',
+					isHigh:true,
+				},
                 {
                     tabImg:require('../../assets/images/tabicons/dest@3x.png'),
                     tabHigh:require('../../assets/images/tabicons/dest-active@3x.png'),
