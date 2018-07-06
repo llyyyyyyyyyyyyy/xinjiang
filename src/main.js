@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Stort from './store/store'
+
 
 //mint ui
 import { Lazyload } from 'mint-ui'
@@ -47,6 +47,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App ,Stort},
+  components: { App },
   template: '<App/>'
 })

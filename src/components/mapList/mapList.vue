@@ -33,10 +33,9 @@ import tag from '../common/tag'
 export default {
     name: 'mapList',
     components:{tag},
-    props:['regionIds'],
+    props:['regionIds','pid'],
     data (){
         return{
-            page:[],
             //高德地图配置
             zoom: 13,
             mapOk: false,
@@ -66,8 +65,7 @@ export default {
             }).then(res => {
                 this.mapListInfo = res.data.data.regionDetail[0].ssList
                 this.center = [this.mapListInfo[0].longitude,this.mapListInfo[0].latitude]
-                console.log( this.mapListInfo)
-                this.initSwiper()               
+                this.initSwiper()     
                 for(let i in this.mapListInfo){
                     this.markers.push({
                         position: [this.mapListInfo[i].longitude,this.mapListInfo[i].latitude],
@@ -79,10 +77,12 @@ export default {
                         },
                         icon: new AMap.Icon({
                             image: that.mySwiper.activeIndex == i ? require('../../assets/images/ssmap.png') : require('../../assets/images/jingdianmap_.png'),
-                            size: that.mySwiper.activeIndex == i ? new AMap.Size(30, 50) :new AMap.Size(20, 50),
-                            // imageOffset: that.mySwiper.activeIndex == i ? new AMap.Pixel(0,0) : new AMap.Pixel(-5,10)
+                            size: that.mySwiper.activeIndex == i ? new AMap.Size(30, 50) :new AMap.Size(20, 50)
                             }),
                     })
+                    if(this.mapListInfo[i].id == this.pid){
+                        this.mySwiper.slideTo(i)
+                    }
                 }
                 this.mapOk = true
             })

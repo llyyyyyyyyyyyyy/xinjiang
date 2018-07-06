@@ -61,7 +61,7 @@
                 <div class="k"></div>
                 <h3>实用信息</h3>
             </div>
-            <div class="map" @click="mapClick(sceInfoData.regionIds)">
+            <div class="map" @click="mapClick(sceInfoData.regionIds,sceInfoData.id)">
                 <el-amap ref="map" vid="amapDemo" :dragEnable="dragEnable" :zoomEnable='zoomEnable' :zoom="zoom" :center="this.center" v-if="this.mapOk">
                     <el-amap-marker vid="component-marker" :position="marker.position"  ></el-amap-marker>
                 </el-amap>
@@ -215,9 +215,9 @@ export default {
             }
         },
         //地图点击
-        mapClick(id){
+        mapClick(regionIds,pid){
             console.log('a')
-             this.$router.push({path:'/mapList/'+id})
+             this.$router.push({path:'/mapList/'+regionIds+'/'+pid})
         }
     },
     created (){
