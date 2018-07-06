@@ -57,7 +57,7 @@ export default new Router({
 
     },
     {
-      path:'/mapList/:regionIds',
+      path:'/mapList/:regionIds/:pid',
       component:mapList,
       name:'mapList',
       props:true
