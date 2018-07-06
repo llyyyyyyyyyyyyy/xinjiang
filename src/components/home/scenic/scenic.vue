@@ -12,13 +12,13 @@
         <div class="swiper-container swiperbox">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="sceniccont" v-for="(n,i) in this.sceList" :key="i" @click="sceClick">
+                    <div class="sceniccont" v-for="(n,i) in this.sceList" :key="i" @click="sceClick(n.id)">
                         <img :src="n.cover_img" alt="">
                         <div class="title">
                             <p>{{n.name}}</p>
                             <div class="recommand">
                                 <span v-for="(i,a) in n.natureList" :key="i.id" v-if="a<3"> · {{i.value}}</span>
-                            </div> 
+                            </div>
                         </div>
                         <div class="info">
                             <p>景点排名第{{i+1}}</p>|
@@ -83,7 +83,7 @@ export default {
         initSwiper(){
             let that = this
             this.mySwiper = new Swiper('.swiper-container', {
-            slidesPerView: 'auto', // 去掉可以将图片 横向 铺满屏幕
+            slidesPerView: 'auto',
             centeredSlides: true,
             autoHeight:true,
             resistanceRatio:0,
@@ -98,7 +98,6 @@ export default {
             this.$http.get('http://xunlu.dev.mydeertrip.com/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:that
                 }}).then(res => {
-                    // console.log(res.data.data.regionDetail[0].ssList)
                     this.sceList = res.data.data.regionDetail[0].ssList
                     Indicator.close()
                 })
@@ -109,19 +108,17 @@ export default {
             this.$http.get('http://xunlu.dev.mydeertrip.com/plan/listRoute',{
                 params:{cursor:1,limit:100,regionIds:that
                 }}).then(res => {
-                    //console.log(res.data.data.routeList[0].rlist)
                    this.rouList = res.data.data.routeList[0].rlist
-                     
                 })
         },
         //点击进入景点
-        sceClick(){
+        sceClick(id){
             console.log('go')
-            this.$router.push({path:'/sceInfo'})
+            this.$router.push({path:'/sceInfo/'+id})
         }
     },
     created (){
-         Indicator.open()
+        Indicator.open()
         this.getSceList()
         this.getRouList()
     },

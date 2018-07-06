@@ -11,7 +11,6 @@ import { Lazyload } from 'mint-ui'
 
 //swiper
 import VueSwiper from 'vue-awesome-swiper'//不需要初始化的
-// import swiper from 'swiper'//初始化的
 import 'swiper/dist/css/swiper.min.css'
 
 
@@ -38,7 +37,6 @@ AMap.initAMapApiLoader({
 
 Vue.use(rem)
 Vue.use(VueSwiper)
-// Vue.use(swiper)
 Vue.use(AMap)
 Vue.use(Lazyload)
 

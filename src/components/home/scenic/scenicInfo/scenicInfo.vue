@@ -8,9 +8,9 @@
             </div>
             <h2>{{this.sceInfoData.name}}</h2>
             <h3>{{this.sceInfoData.enName}}</h3>
-            <h4><i>景点排名第{{this.sceInfoData.type}}</i>|<span>评分 8.5</span></h4>
-            <h5><i>银座 · 东京塔</i>|<span>推荐游玩 1 天</span></h5>
-            <h6>亲子 · 摄影 · 秘境</h6>
+            <h4><i>景点排名第{{this.sceInfoData.type}}</i>|<span>评分 {{this.sceInfoData.score}}</span></h4>
+            <h5><i>{{this.sceInfoData.cityName}}</i>|<span>推荐游玩 {{this.sceInfoData.recomTimeStr}}</span></h5>
+            <h6><span v-for="(n,i) in this.sceInfoData.natureList" :key="n.id" v-if="i<3"> · {{n.value}}</span></h6>
         </header>
         <main>
             <!--简介-->
@@ -18,7 +18,7 @@
                 <div class="k"></div>
                 <h3>速写</h3>
             </div>
-            <div class="skeInfo pSty">
+            <div class="skeInfo pSty" v-if="this.sceInfoData.description150">
                 <p><span>印象：</span>{{this.sceInfoData.description150}}</p>
             </div>
             <div class="intrp pSty" ref="intrp">
@@ -40,12 +40,11 @@
                     </div>
                 </swiper-slide>
             </swiper>
-            
-            <div class="title">
+            <div class="title" v-if="this.sceInfoData.playList!=''">
                 <div class="k"></div>
                 <h3>玩法</h3>
             </div>
-            <swiper class="swiperbox play" :options="swiperOption" >
+            <swiper class="swiperbox play" :options="swiperOption" v-if="this.sceInfoData.playList!=''">
                 <swiper-slide class="contImg" ref="tab" v-for="n in this.sceInfoData.playList" :key="n.id">
                     <div>
                         <div class="image-box">
@@ -62,48 +61,49 @@
                 <div class="k"></div>
                 <h3>实用信息</h3>
             </div>
-            <div class="map">
+            <div class="map" @click="mapClick(sceInfoData.regionIds)">
                 <el-amap ref="map" vid="amapDemo" :dragEnable="dragEnable" :zoomEnable='zoomEnable' :zoom="zoom" :center="this.center" v-if="this.mapOk">
                     <el-amap-marker vid="component-marker" :position="marker.position"  ></el-amap-marker>
                 </el-amap>
+                <div class="shade"></div>
             </div>
             <div class="practical">
-                <h4>
+                <h4 v-if="this.sceInfoData.guideAddress">
                     <img src="../../../../assets/images/scenicInfo/地址 (1)@3x.png" alt="">
                     <span>地址</span>
                     <i>{{this.sceInfoData.guideAddress}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideTicket">
                     <img src="../../../../assets/images/scenicInfo/景点门票@3x.png" alt="" >
                     <span>门票</span>
                     <i>{{this.sceInfoData.guideTicket}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideOpenTime">
                     <img src="../../../../assets/images/scenicInfo/开放时间@3x.png" alt="">
                     <span>开放</span>
                     <i>{{this.sceInfoData.guideOpenTime}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideTraffic">
                     <img src="../../../../assets/images/scenicInfo/交通 copy@3x.png" alt="">
                     <span>交通</span>
                     <i>{{this.sceInfoData.guideTraffic}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideStay">
                     <img src="../../../../assets/images/scenicInfo/房子 copy@3x.png" alt="">
                     <span>住宿</span>
                     <i>{{this.sceInfoData.guideStay}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideTips">
                     <img src="../../../../assets/images/scenicInfo/灯泡@3x.png" alt="">
                     <span>贴士</span>
                     <i>{{this.sceInfoData.guideTips}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guideWebsite">
                     <img src="../../../../assets/images/scenicInfo/网址@3x.png" alt="">
                     <span>网站</span>
                     <i>{{this.sceInfoData.guideWebsite}}</i>
                 </h4>
-                <h4>
+                <h4 v-if="this.sceInfoData.guidePhone">
                     <img src="../../../../assets/images/scenicInfo/电话@3x.png" alt="">
                     <span>电话</span>
                     <i>{{this.sceInfoData.guidePhone}}</i>
@@ -122,9 +122,9 @@
                 <p class=".cont">
                     {{n.commentDesp}}
                 </p>
-                <img class="pic" :src="n.imgList.imgUrl" alt="">
-                <p class="more">查看全部精彩评论   ></p>
+                <img class="pic" v-if="n.imgList" :src="n.imgList.imgUrl" alt="">
             </div>
+            <p class="more">查看全部精彩评论   ></p>
             <div class="title">
                 <div class="k"></div>
                 <h3>附近景点</h3>
@@ -150,6 +150,7 @@ export default {
     components:{
         back
     },
+    props:['id'],
     data(){
         return{
             sceInfoData:[],//景点详情
@@ -175,8 +176,9 @@ export default {
         //获取景点详情
         getSceInfoData(){
             this.$http.get('http://xunlu.dev.mydeertrip.com/scenic_spots/guide',{
-            params:{id:10772,beginDate:'2018-06-20',dayCount:1,token:''}
-      }).then(res => {
+            params:{id:this.id,beginDate:'2018-06-20',dayCount:1,token:''}
+        }).then(res => {
+                console.log(this.id)
                 this.sceInfoData = res.data.data.ss
                 this.center = [this.sceInfoData.longitude,this.sceInfoData.latitude]
                 this.marker.position = this.center
@@ -187,7 +189,7 @@ export default {
         //获取评论
         getComment(){
             this.$http.get('http://xunlu.dev.mydeertrip.com:86/comment/list',{
-                params:{qType:'all',itemId:10772,start:0,limit:3,userId:2911,isCream:0}
+                params:{qType:'all',itemId:this.id,start:0,limit:3,userId:2911,isCream:0}
             }).then(res=>{
                 this.commentData =  res.data.data.list
             })
@@ -195,12 +197,13 @@ export default {
         //附近景点
         getNear(){
             this.$http.get('http://xunlu.dev.mydeertrip.com/scenic_spots/listNearbyss',{
-                params:{lat:this.sceInfoData.longitude,lon:this.sceInfoData.latitude,ssId:10772}
+                params:{lat:this.sceInfoData.longitude,lon:this.sceInfoData.latitude,ssId:this.id}
             }).then(res=>{
                 console.log(res)
                 this.nearData = res.data.data.list
             })
         },
+        //展开内容
         moreIntry () {
             
             if(this.$refs.unfold.innerHTML =='查看更多'){
@@ -210,6 +213,11 @@ export default {
                 this.$refs.intrp.style.height = '0.46rem'
                 this.$refs.unfold.innerHTML ='查看更多'
             }
+        },
+        //地图点击
+        mapClick(id){
+            console.log('a')
+             this.$router.push({path:'/mapList/'+id})
         }
     },
     created (){
@@ -239,6 +247,7 @@ export default {
     header{
         width: 3.27rem;
         margin: 0.34rem auto 0.4rem;
+        overflow: hidden;
         .img-box{
             height: 3.27rem;
             width: 3.27rem;
@@ -287,6 +296,8 @@ export default {
             color: #DD8200;
             font-size: 0.12rem;
             line-height: 0.17rem;
+            margin-left:-0.05rem;
+
         }
     }
     main{
@@ -345,21 +356,28 @@ export default {
         }
         .play{
             height: 2.76rem;
-        .contImg{
-            overflow: hidden;
-        }
+            .contImg{
+                overflow: hidden;
+            }
             img{
                 width: 3.27rem;
                 height: 1.64rem;
                 background: pink;
             }
-           .recommand{
-               margin-left:-0.05rem;
-           }
+            .recommand{
+                margin-left:-0.05rem;
+            }
         }
         .map{
             height: 1.09rem;
             width: 3.27rem;
+            position: relative;
+            .shade{
+                position:absolute;
+                top:0;
+                height: 1.09rem;
+                width: 3.27rem;
+            }
         }
         .practical{
             margin-bottom: 0.16rem;
@@ -422,18 +440,17 @@ export default {
             .pic{
                 width: 0.88rem;
                 height: 0.88rem;
-                margin:0.16rem 0.09rem 0.35rem 0;
+                margin:0.16rem 0.09rem 0 0;
                 display: inline-block;
                 
-            }
-            .more{
+            } 
+        }
+        .more{
                 color: #119DFF;
                 font-size: 0.14rem;
                 line-height: 0.24rem;
-                margin-bottom: 0.4rem;
+                margin:0.33rem 0 0.4rem 0.48rem;
             }
-            
-        }
         .near{
                height: 2rem;
                color: #484848;

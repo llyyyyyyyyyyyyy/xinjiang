@@ -7,6 +7,8 @@ import province from '../components/home/province/province.vue'
 import scenic from '../components/home/scenic/scenic.vue'
 import sceInfo from '../components/home/scenic/scenicInfo/scenicInfo.vue'
 import routerInfo from '../components/home/routerInfo/routerInfo.vue'
+import mapList from '../components/mapList/mapList.vue'
+import play from '../components/home/play/play.vue'
 
 Vue.use(Router)
 
@@ -41,7 +43,7 @@ export default new Router({
       props:true
     },
     {
-      path:'/sceInfo',
+      path:'/sceInfo/:id',
       component:sceInfo,
       name:'sceInfo',
       props:true
@@ -53,6 +55,18 @@ export default new Router({
       name:'routerInfo',
       props:true
 
+    },
+    {
+      path:'/mapList/:regionIds',
+      component:mapList,
+      name:'mapList',
+      props:true
+    },
+    {
+      path:'/play',
+      component:play,
+      name:'play',
+      props:true
     }
   ]
 })

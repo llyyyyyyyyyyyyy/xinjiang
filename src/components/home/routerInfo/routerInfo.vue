@@ -1,17 +1,17 @@
 <template>
     <div class="rouInfo">
-        <back></back>
+        <back style="padding-left:0.24rem"></back>
         <div class="headerCont">
             <img class="top_img" src="ag" alt="">
             <div class="conts">
                 <h3>彩云之南，梦想是行囊，芒鞋是答案</h3>
                 <p class="line">
-                    <img src="a" alt="">
+                    <img src="../../../assets/images/time.png" alt="">
                     <span>线路</span>
                     <span>16天</span>
                 </p>
                 <p class="tansuo">
-                    <img src="a" alt="">
+                    <img src="../../../assets/images/tansuo.png" alt="">
                     <span>丽江与香格里拉雪域朝圣之旅</span>
                 </p>
             </div>
@@ -40,22 +40,29 @@
             </div>
             <div class="cons">
                 <div class="consShow">
-                    <div class="showLeft">
-                        <img src="a" alt="">
-                    </div>
+                    <img class="showLeft" src="../../../assets/images/jingdian.png" alt="">
                     <div class="showRight">
                         <p class="showRightUp">
-                            <span class="l">泸沽湖</span>
-                            <span class="r">开启绝美女儿国的三日旅程</span>
+                            <span>泸沽湖</span>
+                            <i>开启绝美女儿国的三日旅程</i>
                         </p>
                         <p class="showRightDown">
-                            <span>宁蒗县</span>
+                            <i>宁蒗县</i>
                             <span>游玩游玩3天2夜
-                                <img  src="a" alt="">
-                                <img  src="a" alt="">
+                                <img @click="infoShow = !infoShow" v-if='!infoShow' src="../../../assets/images/down.png" alt="">
+                                <img @click="infoShow = !infoShow" v-if='infoShow' src="../../../assets/images/up.png" alt="">
                             </span>
                         </p>
                     </div>
+                </div>
+                <div class="consNone" v-if="this.infoShow">
+                    <swiper :options="{ slidesPerView: 'auto'}" ref="mySwiper">
+                        <swiper-slide>
+                            <img src="a" alt="">
+                        </swiper-slide>
+                    </swiper>
+                    <p>拿出浮生中的三日，环绕泸沽湖对摩梭女儿国来一场深度接触：第一天下午从丽江到达景区后，在泸沽湖观景台拍摄泸沽湖区全景；然后在大落水村游玩片刻，最后到达里格村住宿。 第二天租赁一辆电动车，从里格出发沿顺时针方向环湖骑行，经过尼赛村时通过索道上到女神...</p>
+                    <span>查看攻略</span>
                 </div>
             </div>
         </div>
@@ -67,6 +74,11 @@ export default {
     name: 'rouInfo',
     components:{
         back
+    },
+    data (){
+        return{
+            infoShow: false
+        }
     }
 }
 </script>
@@ -85,7 +97,6 @@ export default {
             img{
                 height: 0.14rem;
                 width: 0.14rem;
-                background: #ccc;
                 display: inline-block;
                 margin-right: 0.06rem;
             }
@@ -191,6 +202,91 @@ export default {
                 font-weight: 400;
                 line-height: 0.25rem;
                 }
+        }
+        .cons{
+            .consShow{
+                	display: flex;
+                    -ms-align-items: center;
+                    align-items: center;
+                .showLeft{
+                    width: 0.24rem;
+                    height: 0.24rem;
+                    margin-left: 0.16rem;
+                    display: inline-block;
+                }
+                .showRight{
+                    padding-left: 0.16rem;
+                    .showRightUp{
+                        span{
+                            display: inline-block;
+                            margin-right: 0.15rem;
+                            font-size: 0.15rem;
+                            letter-spacing: 0.4px;
+                            color: #333;
+                            font-weight: 900;
+                        }
+                        i{
+                            display: inline-block;
+                            font-size: 0.15rem;
+                            font-weight: 300;
+                            letter-spacing: 0.8px;
+                            color: #333;
+                        }
+                    }
+                    .showRightDown{
+                        font-size: 0.12rem;
+                        line-height: 0.16rem;
+                        display: flex;
+                        justify-content: space-between;
+                        color: #999;
+                        font-weight: 300;
+                        margin-top: 0.05rem;
+                        span{
+                            position: absolute;
+                            right: 0.15rem;
+                            font-size: 0.12rem;
+                            line-height: 0.16rem;
+                            color: #999;
+                            letter-spacing: 0.8px;
+                            font-weight: 300;
+                            display: flex;
+                            align-items:center;
+                            img{
+                                width: 0.14rem;
+	                            height: 0.08rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .consNone{
+                padding-top: 0.2rem;
+                padding: 0.14rem 0.13rem;
+                color: #333;
+                font-weight: 300;
+                line-height: 0.25rem;
+                letter-spacing: 0.8px;
+                font-size: 0.15rem;
+                text-align: center;
+                img{
+                    width:3.47rem;
+                    height: 1.74rem;
+                    background: pink;
+                }
+                p{
+                    text-align: left;
+                }
+                span{
+                    display: inline-block;
+                    padding: 0.03rem 0.13rem;
+                    border: 1px solid #3fa9ff;
+                    border-radius: 2px;
+                    color: #3fa9ff;
+                    font-size: 0.14rem;
+                    letter-spacing: 0.8px;
+                    margin-top:0.14rem;
+                }
+            }
         }
     }
 }

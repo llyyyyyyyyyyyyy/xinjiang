@@ -4,15 +4,15 @@
         <div class="provinfo">
             <h2>{{datalist[this.page].provinceName}}</h2>
             <h3>{{datalist[this.page].ename}}</h3>
-            <swiper class="swiperbox" :options="swiperOption" >
-                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in datalist" :key="index" >
-                    <div>
-                        <div class="image-box">
+            <div class="swiperBox">
+                <div class="swiper-container" >
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(n, index) in datalist" :key="index" >
                             <img :src= "n.headImg" @click="provpage(n.provinceId)">
                         </div>
                     </div>
-                </swiper-slide>
-            </swiper>
+                </div>
+            </div>
             <div class="mes">
                 <span>{{datalist[this.page].keyword}}</span>
                 <i>></i>
@@ -26,7 +26,6 @@
 </template>
 <script>
 import back from '../../common/back'
-import { Indicator } from 'mint-ui';
 export default {
     name: 'prov',
     props:['groupDetailId'],
@@ -37,15 +36,7 @@ export default {
         const that = this
         return{
             datalist:[{"provinceName":''}],
-            page:0,
-            swiperOption:{
-                slidesPerView: 'auto',
-                on :{//轮播图下标获取
-                    transitionEnd:function(){
-                        that.page = this.activeIndex
-                    }
-                }
-            }
+            page:0
         }
     },
     
@@ -58,16 +49,28 @@ export default {
       }).then(res => {
                 console.log(res.data.data.detail)
                 this.datalist=res.data.data.detail
-                Indicator.close();
+                this.initSwiper()
             })
         },
         //获取id
         provpage(id){
             console.log(id)
+        },
+        //初始化轮播图
+        initSwiper(){
+            let that = this
+            this.mySwiper = new Swiper('.swiper-container', {
+            resistanceRatio:0,
+            observer:true,
+            slidesPerView: 1,
+            spaceBetween : -12,
+            onSlideChangeEnd() {
+                that.page = that.mySwiper.activeIndex
+                }
+            })
         }
     },
     created (){
-        Indicator.open();
         this.getCouData()
     }
     
@@ -91,14 +94,13 @@ export default {
         height: 0.2rem;
         color: #848484
     }
-    .contImg{
-        width: 3.27rem;
-        height: 1.64rem;
-        margin-right: 0.12rem;
-        img{
-            width: 100%;
-            
-        }
+    .swiper-wrapper{
+        .swiper-slide{
+            width: 3.27rem;
+            img{
+                width: 3.27rem;
+            }
+        }    
     }
     .mes{
         height: 0.61rem;

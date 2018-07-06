@@ -3,7 +3,7 @@
         <!--国家-->
         <div class="country">
             <h2>热门国家与地区<img src="../../assets/images/Combined Shape Copy@3x.png"></h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in country" :key= "index" >
                     <div @click="couclick(n.groupDetailId)">
                         <div class="image-box">
@@ -18,7 +18,7 @@
         <!--州省-->
         <div class="province">
             <h2>推荐州省</h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in province" :key= "index">
                     <div @click="proclick(n.itemId)">
                         <div  class="image-box">
@@ -33,7 +33,7 @@
         <!--热门旅行地（境外旅游）-->
         <div class="hot">
             <h2>热门旅行地</h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in hot" :key= "index">
                     <div>
                         <div class="image-box" @click="proclick(n.itemId)">
@@ -48,7 +48,7 @@
         <!--经典(全球达人路线)-->
         <div class="jingdian">
             <h2>经典旅行线路</h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in jingdian" :key= "index" >
                     <div>
                         <div class="image-box" @click="toRouter(n)">
@@ -64,7 +64,7 @@
         <!--文艺(图片无法完全展示)-->
         <div class="wenyi">
             <h2>文艺旅拍之地</h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in wenyi" :key= "index">
                     <div @click="wenclick(n.itemId,n.groupDetailName)">
                         <div class="image-box">
@@ -79,7 +79,7 @@
         <!--旅行攻略（无数据）-->
         <div class="strategy">
             <h2>旅行攻略</h2>
-            <swiper class="swiperbox" :options="swiperOption">
+            <swiper class="swiperBox" :options="swiperOption">
             <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in strategy" :key= "index" v-if="index<5">
                 <div>
                     <div class="image-box">
@@ -97,7 +97,7 @@
         <!--极致体验(无完全匹配数据)-->
         <div class="best">
             <h2>寻找极致体验</h2>
-           <swiper class="swiperbox" :options="swiperOption">
+           <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in best" :key= "index">
                     <div>
                         <div class="image-box">
@@ -113,7 +113,7 @@
         <!-- 专题游记（无完全匹配数据） -->
         <div class="zhuanti">
             <h2>精选专题与游记</h2>
-           <swiper class="swiperbox" :options="swiperOption">
+           <swiper class="swiperBox" :options="swiperOption">
                 <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in zhuanti" :key= "index">
                     <div>
                         <div class="image-box">
@@ -202,7 +202,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.swiperbox{
+.swiperBox{
         .contImg{
             margin-left:0.12rem;
             .image-box{
