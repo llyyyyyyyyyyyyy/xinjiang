@@ -4,7 +4,7 @@ import router from './router'
 import qs from 'qs'
 import lazy from 'vue-lazyload'
 import Vuex from 'vuex'
-import store from './store/store.js'
+import Stort from './store/store.js'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
@@ -92,6 +92,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App ,Stort}
+  components: { App ,Stort},
   template: '<App/>'
 })

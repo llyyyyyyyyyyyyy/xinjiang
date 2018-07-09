@@ -12,7 +12,7 @@
 		<div class="trip-container">
 			<div class="trips-box">
 				<swiper :options="swiperOption" ref="mySwiper">
-				    <swiper-slide v-for="trip in tripArr">
+				    <swiper-slide v-for="trip in tripArr" :key="trip.id">
 				    	<div class="trip-item">
 								<p @click="toDetails(trip.id,trip.user.id)">
 								<img :src="trip.setCoverImg">
