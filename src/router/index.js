@@ -1,33 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//é¦–é¡µ
+//Ê×Ò³
 import Home from '../components/home/home.vue'
-//è¡Œç¨‹é¦–é¡µ
+//ĞĞ³ÌÊ×Ò³
 import Trip from '../components/trip/trip.vue'
-//çº¿è·¯åˆ—è¡¨
+//ÏßÂ·ÁĞ±í
 import LineList from '../components/module/line/lineList/lineList.vue'
-//çº¿è·¯è¯¦æƒ…
+//ÏßÂ·ÏêÇé
 import DetailsLine from '../components/module/line/detailsLine/detailsLine.vue'
-//é€‰æ‹©å›½å®¶
+//Ñ¡Ôñ¹ú¼Ò
 import country from '../components/module/create/country/country.vue'
-//é€‰æ‹©ç›®çš„åœ°
+//Ñ¡ÔñÄ¿µÄµØ
 import destination from '../components/module/create/destination/destination.vue'
-//åˆ›å»ºæ–¹å¼
+//´´½¨·½Ê½
 import createWay from '../components/module/create/CreateWay/createWay.vue'
-//è¡Œç¨‹è®¾ç½®
+//ĞĞ³ÌÉèÖÃ
 import setCreate from '../components/module/create/setCreate/setCreate.vue'
-//å¾€è¿”åŸå¸‚
+//Íù·µ³ÇÊĞ
 import backForthCity from '../components/module/create/backForthCity/backForthCity.vue'
-//é€‰æ‹©æ—¥æœŸ
+//Ñ¡ÔñÈÕÆÚ
 import chooseDate from '../components/module/create/chooseDate/chooseDate.vue'
-//åå¥½è®¾ç½®
+//Æ«ºÃÉèÖÃ
 import setPreferences from '../components/module/create/setPreferences/setPreferences.vue'
-//é€‰æ‹©åŸå¸‚æ™¯ç‚¹
+//Ñ¡Ôñ³ÇÊĞ¾°µã
 import choosePoi from '../components/module/create/choosePoi/choosePoi.vue'
-// é€‰æ‹©æ™¯ç‚¹
+// Ñ¡Ôñ¾°µã
 import poiList from '../components/module/poiList/poiList.vue'
-
-
+//
+import homeCountry from '../components/home/country/country.vue'
+import homeProvince from '../components/home/province/province.vue'
+import scenic from '../components/home/scenic/scenic.vue'
+import sceInfo from '../components/home/scenic/scenicInfo/scenicInfo.vue'
+import routerInfo from '../components/home/routerInfo/routerInfo.vue'
+import mapList from '../components/mapList/mapList.vue'
+import play from '../components/home/play/play.vue'
 
 Vue.use(Router)
 
@@ -36,7 +42,7 @@ export default new Router({
     {
       path: '/',
       component:Home,
-
+      name:'Home'
     },
     {
       path: '/trip',
@@ -98,5 +104,50 @@ export default new Router({
       component:poiList,
       name:'poiList'
     },
+    {
+      path: '/homeCountry/:groupDetailId',
+      component:homeCountry,
+      name:'homeCountry',
+      props:true
+    },
+    {
+      path: '/homeProvince/:itemId',
+      component:homeProvince,
+      name:'homeProvince',
+      props:true
+    },
+    {
+      path:'/scenic/:groupDetailId/:groupDetailName',
+      component:scenic,
+      name:'scenic',
+      props:true
+    },
+    {
+      path:'/sceInfo/:id',
+      component:sceInfo,
+      name:'sceInfo',
+      props:true
+
+    },
+    {
+      path:'/routerInfo',
+      component:routerInfo,
+      name:'routerInfo',
+      props:true
+
+    },
+    {
+      path:'/mapList/:regionIds/:pid',
+      component:mapList,
+      name:'mapList',
+      props:true
+    },
+    {
+      path:'/play',
+      component:play,
+      name:'play',
+      props:true
+    }
+
   ]
 })

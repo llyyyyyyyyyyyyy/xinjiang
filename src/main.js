@@ -1,9 +1,6 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Stort from './store/store'
 import qs from 'qs'
 import lazy from 'vue-lazyload'
 import Vuex from 'vuex'
@@ -12,16 +9,20 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
 
+//mint ui
+import { Lazyload } from 'mint-ui'
+
 
 //swiper
-import Swiper from 'vue-awesome-swiper'
-import '../node_modules/swiper/dist/css/swiper.min.css'
+import VueSwiper from 'vue-awesome-swiper'//不需要初始化的
+import 'swiper/dist/css/swiper.min.css'
+
 
 //地图
 import AMap from 'vue-amap'
 
-//样式reset
-import './stylesheets/_reset.scss'
+//样式
+import './stylesheets/main.scss'
 
 //rem适配
 import rem from './assets/rem'
@@ -60,11 +61,12 @@ AMap.initAMapApiLoader({
 });
 
 Vue.use(rem)
-Vue.use(Swiper)
+Vue.use(VueSwiper)
 Vue.use(AMap)
 Vue.use(lazy)
 Vue.use(Vuex)
 Vue.use(Mint)
+Vue.use(Lazyload)
 
 
 window.tool = {};
@@ -87,11 +89,9 @@ Date.prototype.format = function(seperator) {
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  store,
-  components: { App ,Stort},
+  components: { App ,Stort}
   template: '<App/>'
 })

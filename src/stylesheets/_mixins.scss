@@ -1,0 +1,13 @@
+@mixin swipercommon {
+    background:#ccc;
+    .contImg{
+        margin-left:0.12rem;
+        .image-box{
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }      
+}

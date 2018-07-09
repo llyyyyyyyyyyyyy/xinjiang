@@ -3,26 +3,26 @@
         <!--国家-->
         <div class="country">
             <h2>热门国家与地区<img src="../../assets/images/Combined Shape Copy@3x.png"></h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-            <swiper-slide class="contImg" ref="tab" v-for="(n, index) in country" :key="index">
-                <div>
-                    <div class="image-box router-box">
-                        <img :src="n.coverImg ">
+            <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in country" :key= "index" >
+                    <div @click="couclick(n.groupDetailId)">
+                        <div class="image-box">
+                            <img v-lazy= "n.coverImg ">
+                        </div>
+                        <p class="title">{{n.yyGroupDetailName}}</p>
+                        <p class="recommand">{{n.description}}</p>
                     </div>
-                    <p class="title">{{n.yyGroupDetailName}}</p>
-                    <p class="recommand">{{n.description}}</p>
-                </div>
-            </swiper-slide>
-        </swiper>
+                </swiper-slide>
+            </swiper>
         </div>
         <!--州省-->
         <div class="province">
             <h2>推荐州省</h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in province" :key="index">
-                    <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+            <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in province" :key= "index">
+                    <div @click="proclick(n.itemId)">
+                        <div  class="image-box">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
                         <p class="recommand">{{n.description}}</p>
@@ -33,11 +33,11 @@
         <!--热门旅行地（境外旅游）-->
         <div class="hot">
             <h2>热门旅行地</h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in hot" :key="index">
+            <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in hot" :key= "index">
                     <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+                        <div class="image-box" @click="proclick(n.itemId)">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
                         <p class="recommand">{{n.description}}</p>
@@ -48,11 +48,11 @@
         <!--经典(全球达人路线)-->
         <div class="jingdian">
             <h2>经典旅行线路</h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in jingdian" :key="index">
+            <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in jingdian" :key= "index" >
                     <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+                        <div class="image-box" @click="toRouter(n)">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -64,11 +64,11 @@
         <!--文艺(图片无法完全展示)-->
         <div class="wenyi">
             <h2>文艺旅拍之地</h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in wenyi" :key="index">
-                    <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+            <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in wenyi" :key= "index">
+                    <div @click="wenclick(n.itemId,n.groupDetailName)">
+                        <div class="image-box">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="title">{{n.yyGroupDetailName}}</p>
                         <p class="recommand">{{n.description}}</p>
@@ -79,11 +79,11 @@
         <!--旅行攻略（无数据）-->
         <div class="strategy">
             <h2>旅行攻略</h2>
-            <swiper class="promotion_routes" :options="swiperOption">
-            <swiper-slide class="contImg" ref="tab" v-for="(n, index) in strategy" :key="index">
+            <swiper class="swiperBox" :options="swiperOption">
+            <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in strategy" :key= "index" v-if="index<5">
                 <div>
-                    <div class="image-box router-box">
-                        <img :src="n.cover_img + '-GDcreateroute3.ht'">
+                    <div class="image-box">
+                        <img v-lazy="n.cover_img + '-GDcreateroute3.ht'">
                         <div class="image-tag">
                             <p>{{n.distanceStr}}</p>
                         </div>
@@ -97,11 +97,11 @@
         <!--极致体验(无完全匹配数据)-->
         <div class="best">
             <h2>寻找极致体验</h2>
-           <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in best" :key="index">
+           <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in best" :key= "index">
                     <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+                        <div class="image-box">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -113,11 +113,11 @@
         <!-- 专题游记（无完全匹配数据） -->
         <div class="zhuanti">
             <h2>精选专题与游记</h2>
-           <swiper class="promotion_routes" :options="swiperOption">
-                <swiper-slide class="contImg" ref="tab" v-for="(n, index) in zhuanti" :key="index">
+           <swiper class="swiperBox" :options="swiperOption">
+                <swiper-slide class="contImg" ref="tab" v-for= "(n, index) in zhuanti" :key= "index">
                     <div>
-                        <div class="image-box router-box">
-                            <img :src="n.coverImg ">
+                        <div class="image-box">
+                            <img v-lazy="n.coverImg ">
                         </div>
                         <p class="tag">{{n.address}}<i>|</i><span class="label">{{n.label}}</span></p>
                         <p class="title">{{n.yyGroupDetailName}}</p>
@@ -133,10 +133,11 @@
 <script>
 import Vue from 'vue'
 import Tab from '../tabbtn/tab'
+import { Indicator } from 'mint-ui';
 export default {
     name:'home',
     components:{
-        Tab
+        Tab,
     },
     data() {
         return{    
@@ -145,7 +146,7 @@ export default {
             hot:[],
             jingdian:[],
             wenyi:[],
-            strategy :[{name:1},{name:2},{name:3},{name:2},{name:2}],
+            strategy :[],
             best:[],
             zhuanti:[],
             homeinfo:[],
@@ -155,34 +156,53 @@ export default {
         }
     },
     methods:{
+        //国家点击
+        couclick(id){
+            this.$router.push({path:'/homeCountry/'+id})
+        },
+        //省份点击
+        proclick(id){          
+            this.$router.push({path:'/homeProvince/'+id})
+            console.log(id)
+        },
+        //景点点击(文艺)
+        wenclick(id,name){
+            console.log(name)
+            this.$router.push({path:'/scenic/'+id+'/'+name})
+        },
+        //线路点击
+        toRouter(id){
+            console.log(id)
+            this.$router.push({path:'/routerInfo'})
+        },
         //获取数据
-        getData(){
+        getHomeData(){
             this.$http.get('xl/face/list').then(res => {
                 this.homeinfo = res.data.data.faceList
-                console.log(this.homeinfo)
                 this.country = this.homeinfo[0].detailList//国家
+                // console.log(this.country)
                 this.province = this.homeinfo[1].detailList//州省
                 this.hot = this.homeinfo[2].detailList//热门（境外旅行）
                 this.jingdian = this.homeinfo[9].detailList//经典(全球达人路线)
                 this.wenyi = this.homeinfo[3].detailList//文艺（花色浪漫旅拍）
                 this.best = this.homeinfo[18].detailList//极致体验
                 this.zhuanti = this.homeinfo[19].detailList//专题游记
+                Indicator.close()
             })
         }
+    }, 
+    created(){
+        Indicator.open()
     },
-    
-
-    
     mounted () {
-        this.getData()   
+        this.getHomeData()   
     },
 
     
 }
 </script>
-<style lang="scss" >
-.promotion_routes{
-        background:#ccc;
+<style lang="scss" scoped>
+.swiperBox{
         .contImg{
             margin-left:0.12rem;
             .image-box{
@@ -192,11 +212,11 @@ export default {
                 width: 100%;
                 height: auto;
             }
-        }
-        
+        }    
     }
+    
 #home{
-    padding-bottom: 0.49rem;
+    padding:0.54rem 0 0.49rem;
     .country{
         padding:0 0 0.46rem 0.12rem;
         color: #484848;
@@ -217,8 +237,7 @@ export default {
         .contImg{
             width: 2.5rem;
             .image-box{
-                height: 2.5rem;     
-                background: pink;
+                height: 2.5rem;     ;
             }
             .title{
                 font-size: 0.15rem;
@@ -249,7 +268,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.28rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -279,8 +297,7 @@ export default {
         .contImg{
             width: 1.58rem ;
             .image-box{
-                height: 2.36rem;     
-                background: pink;
+                height: 2.36rem;     ;
                 overflow: hidden;
                 img{
                     width: auto;
@@ -317,7 +334,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;
@@ -359,7 +375,6 @@ export default {
             width: 1.58rem ;
             .image-box{
                 height: 0.89rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -391,7 +406,6 @@ export default {
             width: 1rem ;
             .image-box{
                 height: 1.5rem;     
-                background: pink
             }
             .title{
                 font-size: 0.15rem;
@@ -420,7 +434,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;
@@ -461,7 +474,6 @@ export default {
             width: 2.28rem ;
             .image-box{
                 height: 1.52rem;     
-                background: pink
             }
             .tag{
                 height: 0.14rem;
