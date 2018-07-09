@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/home/home.vue'
 import Trip from '../components/trip/trip.vue'
-import country from '../components/home/country/country.vue'
-import province from '../components/home/province/province.vue'
+import homeCountry from '../components/home/country/country.vue'
+import homeProvince from '../components/home/province/province.vue'
 import scenic from '../components/home/scenic/scenic.vue'
 import sceInfo from '../components/home/scenic/scenicInfo/scenicInfo.vue'
 import routerInfo from '../components/home/routerInfo/routerInfo.vue'
@@ -25,15 +25,15 @@ export default new Router({
       name:'trip'
     },
     {
-      path: '/country/:groupDetailId',
-      component:country,
-      name:'country',
+      path: '/homeCountry/:groupDetailId',
+      component:homeCountry,
+      name:'homeCountry',
       props:true
     },
     {
-      path: '/province/:itemId',
-      component:province,
-      name:'province',
+      path: '/homeProvince/:itemId',
+      component:homeProvince,
+      name:'homeProvince',
       props:true
     },
     {

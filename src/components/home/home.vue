@@ -158,11 +158,11 @@ export default {
     methods:{
         //国家点击
         couclick(id){
-            this.$router.push({path:'/country/'+id})
+            this.$router.push({path:'/homeCountry/'+id})
         },
         //省份点击
         proclick(id){          
-            this.$router.push({path:'/province/'+id})
+            this.$router.push({path:'/homeProvince/'+id})
             console.log(id)
         },
         //景点点击(文艺)

@@ -1,18 +1,18 @@
 <template>
     <div class="rouInfo">
-        <back style="padding-left:0.24rem"></back>
+        <back style="padding:0 0 0.24rem 0.24rem"></back>
         <div class="headerCont">
-            <img class="top_img" src="ag" alt="">
+            <img class="top_img" :src="this.routerData.img" alt="">
             <div class="conts">
-                <h3>彩云之南，梦想是行囊，芒鞋是答案</h3>
+                <h3>{{this.routerData.title}}</h3>
                 <p class="line">
                     <img src="../../../assets/images/time.png" alt="">
                     <span>线路</span>
-                    <span>16天</span>
+                    <span>{{this.routerData.dayCount}}天</span>
                 </p>
                 <p class="tansuo">
                     <img src="../../../assets/images/tansuo.png" alt="">
-                    <span>丽江与香格里拉雪域朝圣之旅</span>
+                    <span>{{this.routerData.subTitle}}</span>
                 </p>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <img src="../../../assets/images/Rectangle 37@2x.png" alt="">
             </div>
             <p class="lineCont">
-                最苍莽的天地与最温润的人间，只有在彩云之南，才结合得完美无瑕。香格里拉与丽江，半个多月的旅程，却仅仅是浅尝辄止。在丽江古城，试问一下源于内心的喧嚣，然后在玉龙雪山和玉湖村，找到忘却已久的宁静。在徒步虎跳峡的临渊山居，回忆江湖有梦；在环绕泸沽湖最苍莽的天地与最温润的人间，最苍莽的天地与最温润的人间。
+                {{this.routerData.description}}
             </p>
         </div>
         <div class="mapbox">
@@ -77,8 +77,22 @@ export default {
     },
     data (){
         return{
-            infoShow: false
+            infoShow: false,
+            routerData:[]
         }
+    },
+    methods :{
+        getRouterData(){
+            this.$http.get('http://xunlu.dev.mydeertrip.com/route',{
+            params:{id:199,entry:1,dayCount:1}
+        }).then(res =>{
+            console.log(res.data.data.route)
+            this.routerData = res.data.data.route
+        }
+        )}
+    },
+    created (){
+        this.getRouterData()
     }
 }
 </script>
