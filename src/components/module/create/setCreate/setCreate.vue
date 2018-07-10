@@ -98,9 +98,8 @@
 				
 				var now = new Date();
 		        var year = now.getFullYear();       //年
-		        var month = now.getMonth() + 1 > 10 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1);     //月
-		        var day = now.getDate() > 10 ? now.getDate() : '0' + now.getDate();            //日
-
+		        var month = now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1);     //月
+		        var day = now.getDate() >= 10 ? now.getDate() : '0' + now.getDate();            //日
 		        _this.date = _this.tripDate.ds
 
 		        if (_this.tripDate.time) return
@@ -115,6 +114,19 @@
 		        _this.$store.dispatch('fetch_tripDate',date)
 			}
 		},
+		beforeRouteEnter(to, from, next){
+			console.log(to)
+			
+			next((vm) => {
+				if (typeof vm.prefer[0] != 'object' || (vm.prefer.length == 1 && vm.prefer[0].name == '不限')) return
+				vm.preFlag = true;
+				let arr = []
+				for (var i = 0; i < vm.prefer.length; i++) {
+					arr.push(vm.prefer[i].name)
+				}
+				vm.pre = arr.join(',')
+			});
+		},
 		created(){
 			const _this = this;
 			_this.dateFormat();
@@ -125,7 +137,6 @@
 				arr.push(_this.prefer[i].name)
 			}
 			this.pre = arr.join(',')
-			
 		}
 	}
 </script>

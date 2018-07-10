@@ -128,8 +128,8 @@
 				// this.dateStart = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).format()
 				var now = new Date();
 		        var year = now.getFullYear();       //年
-		        var month = now.getMonth() + 1 > 10 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1);     //月
-		        var day = now.getDate() > 10 ? now.getDate() : '0' + now.getDate();            //日
+		        var month = now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1);     //月
+		        var day = now.getDate() >= 10 ? now.getDate() : '0' + now.getDate();            //日
 		        this.dateStart = this.$route.params.type
 			}
 

@@ -35,7 +35,7 @@
             :dragEnable="dragEnable"
             class="amap-demo"
             style="width:100%;height:1.2rem;z-index:1;">
-              <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker.position" :events="marker.events"></el-amap-marker>
+              <el-amap-marker v-for="(marker, i) in markers" :icon="marker.icon" :position="marker.position" :events="marker.events" :key="i"></el-amap-marker>
             </el-amap>
       </div>
 			<ul v-for="(day,index) in lineArr.dayList" class="dayConts" v-if="lineArr.dayList.length!=0">
@@ -79,7 +79,7 @@
 						<div class="consNone" v-if="line.isShow">
               <!--<img :src="line.imgList[0].img + '-govhomeslide.ios'" alt="">-->
 							<swiper :options="{ slidesPerView: 'auto'}" ref="mySwiper">
-							    <swiper-slide v-for="img in line.imgList" :style="{ backgroundImage: 'url(' + img.img+'-govhomeslide.ios' + ')' }">
+							    <swiper-slide v-for="(img, i) in line.imgList" :style="{ backgroundImage: 'url(' + img.img+'-govhomeslide.ios' + ')' }" :key="i">
 							    	<div class="swiper-lazy-preloader" slot="preloader"></div>
 							    </swiper-slide>
 						    	<div class="swiper-pagination"  slot="pagination"></div>

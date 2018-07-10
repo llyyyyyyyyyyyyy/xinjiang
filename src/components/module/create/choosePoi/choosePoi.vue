@@ -40,7 +40,6 @@
 			
 		},
 		created(){
-			console.log(this.cityData)
 		},
 	}
 </script>

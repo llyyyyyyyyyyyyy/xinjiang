@@ -18,7 +18,7 @@
 					<p class="name">{{pre.name}}</p>
 					<p class="num">景点排名第 {{index+1}} | {{pre.recomTimeStr}}</p>
 				</div>
-				<input type="checkbox" :id="'checkbox-0-'+index" v-model="preData" :value="pre"/><label :for="'checkbox-0-'+index"></label>
+				<input type="checkbox" :id="'checkbox-0-'+index" v-model="preData" :value="pre.id"/><label :for="'checkbox-0-'+index"></label>
 			</li>
 		</ul>
 		<p v-if="noPreferData.length>0">其他推荐景点</p>
@@ -29,12 +29,12 @@
 					<p class="name">{{np.name}}</p>
 					<p class="num">景点排名第 {{index+1}} | {{np.recomTimeStr}}</p>
 				</div>
-				<input type="checkbox" :id="'checkbox-1-'+index" v-model="preData" :value="np"/><label :for="'checkbox-1-'+index"></label>
+				<input type="checkbox" :id="'checkbox-1-'+index" v-model="preData" :value="np.id"/><label :for="'checkbox-1-'+index"></label>
 			</li>
 		</ul>
 		<div class="btn">
 			<span class="helpBtn">帮我补充</span>
-			<span class="addBtn">添加完成</span>
+			<span class="addBtn" @click='addClick'>添加完成</span>
 		</div>
 	</div>
 </template>
@@ -55,9 +55,13 @@
 			}
 		},
 		computed: {
-			...mapGetters(['tripDate', 'prefer']),
+			...mapGetters(['tripDate', 'prefer','choosePOI']),
 		},
 		methods:{
+			addClick(){
+				const _this = this;
+				_this.$router.go(-1)
+			},
 			getData(){
 				const _this = this;
 				var regionId = _this.$route.params.id;
@@ -73,12 +77,27 @@
 					Indicator.close();
 					_this.preferData = res.data.data.regionDetail[0].preferSsList
 					_this.noPreferData = res.data.data.regionDetail[0].nopreferSsList
+					_this.preData = _this.choosePOI
+					console.log(res.data.data.regionDetail[0].preferSsList[1] == _this.choosePOI[1])
+					console.log(res.data.data.regionDetail[0].preferSsList[1], _this.choosePOI[1])
 				}, function(){
 
 				})
 			},
 		},
-		created(){
+		beforeRouteEnter(to, from, next){
+			next( (vm) => {
+				if (typeof vm.prefer[0] !== 'string') {
+					var arr = [];
+					for (var i = 0; i < vm.prefer.length; i++) {
+						arr.push(vm.prefer[i].id)
+					}
+					vm.preferIds = arr.join(',')
+					vm.getData()
+				}
+			} );
+		},
+		mounted: function(){
 			if (typeof this.prefer[0] !== 'string') {
 				var arr = [];
 				for (var i = 0; i < this.prefer.length; i++) {
@@ -86,8 +105,14 @@
 				}
 				this.preferIds = arr.join(',')
 			}
+			
 			this.getData()
 			Indicator.open();
+		},
+		watch:{
+			'preData':function() {
+				this.$store.dispatch('fetch_choosePOI',this.preData);
+			}
 		}
 	}
 </script>

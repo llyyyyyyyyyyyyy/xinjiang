@@ -72,7 +72,7 @@ export default new Router({
     {
       path: '/createWay',
       component:createWay,
-      name:'createWay'
+      name:'createWay',
     },
     {
       path: '/setCreate',

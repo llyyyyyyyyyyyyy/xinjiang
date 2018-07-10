@@ -15,6 +15,8 @@ const state = {
   prefer:['不限'],
   // 选择的 城市 数据
   cityData:[],
+  //选择景点数据
+  choosePOI:[],
 }
 
 const getters = {
@@ -28,6 +30,7 @@ const getters = {
   tripDate: state => state.tripDate,
   prefer: state => state.prefer,
   cityData: state => state.cityData,
+  choosePOI: state => state.choosePOI,
 }
 
 const mutations = {
@@ -61,6 +64,9 @@ const mutations = {
   commit_cityData(state, city){
     state.cityData = city
   },
+  commit_choosePOI(state, poi){
+    state.choosePOI = poi
+  },
 }
 
 const actions = {
@@ -93,6 +99,9 @@ const actions = {
   },
   fetch_cityData({ commit }, city) {
     commit('commit_cityData',city)
+  },
+  fetch_choosePOI({ commit }, poi) {
+    commit('commit_choosePOI',poi)
   },
 }
 

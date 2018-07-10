@@ -19,12 +19,18 @@
 	</div>
 </template>
 <script charset="utf-8" async defer>
+	import { mapGetters } from 'vuex'
+	import { mapActions } from 'vuex'
 	export default{
 		data(){
 			return{
 				
 			}
+		},
+		
+		created(){
+			// this.$store.dispatch('fetch_choosePOI',[]);
 		}
 	}
 </script>
-<style src="./createWay.css" scoped></style> 
+<style src="./createWay.css" scoped></style>
