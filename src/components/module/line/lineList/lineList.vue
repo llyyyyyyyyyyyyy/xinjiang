@@ -19,6 +19,10 @@
 					<!-- </div> -->
 				</div>
 			</div>
+			<input v-if="$route.params.type" type="checkbox" :id="'checkbox-0-'+index"/><label :for="'checkbox-0-'+index"></label>
+		</div>
+		<div class="btn" v-if="$route.params.type">
+			<p class="add">确认添加路线</p>
 		</div>
 	</div>
 </template>
@@ -49,7 +53,7 @@
 			},
 			getData(){
 				const _this = this;
-				this.$http.get('/plan/listRoute?cursor=1&fixRegionId=0&limit=1000&regionIds='+regionIds)
+				this.$http.get('/plan/listRoute?cursor=1&fixRegionId=0&limit=1000&regionIds='+_this.$route.params.region)
 				.then(function(res){
 					_this.lists = res.data.data.routeList[0].rlist
 				}, function(){

@@ -1,30 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//Ê×Ò³
+//é¦–é¡µ
 import Home from '../components/home/home.vue'
-//ĞĞ³ÌÊ×Ò³
+//è¡Œç¨‹é¦–é¡µ
 import Trip from '../components/trip/trip.vue'
-//ÏßÂ·ÁĞ±í
+//çº¿è·¯åˆ—è¡¨
 import LineList from '../components/module/line/lineList/lineList.vue'
-//ÏßÂ·ÏêÇé
+//çº¿è·¯è¯¦æƒ…
 import DetailsLine from '../components/module/line/detailsLine/detailsLine.vue'
-//Ñ¡Ôñ¹ú¼Ò
+//é€‰æ‹©å›½å®¶
 import country from '../components/module/create/country/country.vue'
-//Ñ¡ÔñÄ¿µÄµØ
+//é€‰æ‹©ç›®çš„åœ°
 import destination from '../components/module/create/destination/destination.vue'
-//´´½¨·½Ê½
+//åˆ›å»ºæ–¹å¼
 import createWay from '../components/module/create/CreateWay/createWay.vue'
-//ĞĞ³ÌÉèÖÃ
+//è¡Œç¨‹è®¾ç½®
 import setCreate from '../components/module/create/setCreate/setCreate.vue'
-//Íù·µ³ÇÊĞ
+//å¾€è¿”åŸå¸‚
 import backForthCity from '../components/module/create/backForthCity/backForthCity.vue'
-//Ñ¡ÔñÈÕÆÚ
+//é€‰æ‹©æ—¥æœŸ
 import chooseDate from '../components/module/create/chooseDate/chooseDate.vue'
-//Æ«ºÃÉèÖÃ
+//åå¥½è®¾ç½®
 import setPreferences from '../components/module/create/setPreferences/setPreferences.vue'
-//Ñ¡Ôñ³ÇÊĞ¾°µã
+//é€‰æ‹©åŸå¸‚æ™¯ç‚¹
 import choosePoi from '../components/module/create/choosePoi/choosePoi.vue'
-// Ñ¡Ôñ¾°µã
+// é€‰æ‹©æ™¯ç‚¹
 import poiList from '../components/module/poiList/poiList.vue'
 //
 import homeCountry from '../components/home/country/country.vue'
@@ -50,7 +50,7 @@ export default new Router({
       name:'trip'
     },
     {
-      path: '/lineList',
+      path: '/lineList/:region/:type?',
       component:LineList,
       name:'lineList'
     },

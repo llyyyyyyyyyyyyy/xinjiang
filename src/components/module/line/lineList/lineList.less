@@ -1,7 +1,9 @@
 #list{
-	padding: 0 0.24rem;
+	padding-bottom: 0.85rem;
 	.lists{
+		padding: 0 0.24rem;
 		margin-top: 0.24rem;
+		position: relative;
 		.imgs{
 			border-radius: 0.1rem;
 			overflow: hidden;
@@ -43,6 +45,64 @@
 					}
 				}
 			}
+		}
+		input[type="checkbox"]{
+			display: inline-block;
+			width: 0.24rem;
+			height: 0.24rem;
+			display: none;
+			border: none;
+			border: 0.01rem solid red;
+			z-index: 111;
+			position: absolute;
+			right: 0.4rem;
+			top: -0.12rem;
+
+		}
+		[id^="checkbox-0-"] + label {
+			display: inline-block;
+			// border: none;
+			width: 0.24rem;
+			height: 0.24rem;
+			background-image: url(../../../../assets/images/add.png);
+			background-repeat: no-repeat;
+			background-size: 0.24rem 0.24rem;
+			background-position: 0rem 0rem;
+			position: absolute;
+			right: 0.4rem;
+			top: -0.12rem;
+		}
+		[id^="checkbox-0-"]:checked + label {
+			width: 0.24rem;
+			height: 0.24rem;
+			background-image: url(../../../../assets/images/yes.png);
+			background-repeat: no-repeat;
+			background-size: 0.24rem 0.24rem;
+			background-position: 0rem 0rem;
+			position: absolute;
+			right: 0.4rem;
+			top: -0.12rem;
+		}
+	}
+	.btn{
+		width: 100%;
+		height: 0.8rem;
+		background: #fff;
+		border-top: 0.01rem solid #eee;
+		position: fixed;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.add{
+			width: 3.27rem;
+			height: 0.5rem;
+			background: #119DFF;
+			border-radius: 0.05rem;
+			font-size: 0.15rem;
+			color: #fff;
+			text-align: center;
+			line-height: 0.5rem;
 		}
 	}
 }

@@ -1,13 +1,17 @@
 <template>
 	<div id="poi">
+		<router-link class="line" :to="{ name: 'lineList', params:{ region: $route.params.id, type: 'choose' } }">
+			<h2>为您推荐的路线</h2>
+		</router-link>
 		<p v-if="preferData.length>0">按您<span>偏好</span>为您推荐的景点</p>
 		<ul>
 			<li v-for="(pre, index) in preferData" :key="pre.id">
 				<img v-lazy="pre.img" alt="">
 				<div>
 					<p class="tag">
-						<span :class="pre.perferMatch.length==0 ? 'n' : 't'" v-if="pre.tag">应季</span>
-						<span v-for="(match, n) in pre.perferMatch" class="tags">
+						<!-- :class="pre.perferMatch.length==0 ? 'n' : 't'" -->
+						<span v-if="pre.tag">应季</span>
+						<span v-for="(match, n) in pre.perferMatch" class="tags" :key="n">
 							{{match.value}} <i>·</i>
 						</span>
 					</p>
@@ -28,6 +32,10 @@
 				<input type="checkbox" :id="'checkbox-1-'+index" v-model="preData" :value="np"/><label :for="'checkbox-1-'+index"></label>
 			</li>
 		</ul>
+		<div class="btn">
+			<span class="helpBtn">帮我补充</span>
+			<span class="addBtn">添加完成</span>
+		</div>
 	</div>
 </template>
 <script>
@@ -62,7 +70,6 @@
 					"beginDate": _this.tripDate.ds,
 				}
 				_this.$http.post('/plan/sslistNew',data).then(function(res){
-					console.log(res.data.data.regionDetail[0])
 					Indicator.close();
 					_this.preferData = res.data.data.regionDetail[0].preferSsList
 					_this.noPreferData = res.data.data.regionDetail[0].nopreferSsList
