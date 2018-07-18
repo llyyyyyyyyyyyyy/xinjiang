@@ -15,7 +15,7 @@
 				    <swiper-slide v-for="trip in tripArr" :key="trip.id">
 				    	<div class="trip-item">
 								<p @click="toDetails(trip.id,trip.user.id)">
-								<img :src="trip.setCoverImg">
+								<img :src="trip.coverImg">
 								</p>
 					    	<div class="playDay">
 					    		<!-- <div class="num">{{trip.dayCount|dayFormat}}<span class="day">天</span></div> -->
@@ -53,7 +53,7 @@
 				delUrl:'/plan/delPlan',
 				swiperOption: {
 			        slidesPerView: 'auto',
-			        centeredSlides: true,
+			        centeredSlides: false,
 			        spaceBetween : 25,
 		        },
 			}
@@ -68,19 +68,20 @@
 		        
 	      	},
 			delClick: function(id){
+				const _this = this;
 				if(window.confirm('是否删除行程?')){
 					let data = {
 						token: tool.token(),
 						id:id,
 						// appKey:'macau'
 					}
-					this.$http.post(this.delUrl,data,{
+					_this.$http.post(_this.delUrl,data,{
 			            emulateJSON:true
 			        }).then(function(res){
 			        	if (res.data.msg == 'token为空') {
 			        		alert('删除失败')
 			        	};
-		            this.getData();
+		            	_this.getData();
 			        }, function(res){
 			        	alert(res.data.msg+"--删除失败")
 			        })
@@ -164,14 +165,12 @@
 		width: 0.02rem;
 		height: 100%;
 	}
-	#trip .swiper-container{
-    /*height: 4.75rem;*/
-	}
 	#trip .swiper-slide .trip-item{
 		width: 100%;
 		border-radius: .05rem;
 	}
 	#trip .swiper-container{
 		padding-bottom: .5rem !important;
+		padding-left: 0.64rem;
 	}
 </style>

@@ -19,21 +19,24 @@
 					<!-- </div> -->
 				</div>
 			</div>
-			<input v-if="$route.params.type" type="checkbox" :id="'checkbox-0-'+index"/><label :for="'checkbox-0-'+index"></label>
+			<input v-if="$route.params.type" type="checkbox" v-model="lineArr" :value="poi" :id="'checkbox-0-'+index"/><label :for="'checkbox-0-'+index"></label>
 		</div>
 		<div class="btn" v-if="$route.params.type">
-			<p class="add">确认添加路线</p>
+			<p class="add" @click="addClick">确认添加路线</p>
 		</div>
 	</div>
 </template>
 <script>
+	import { Indicator } from 'mint-ui'
+	import { mapGetters } from 'vuex'
+	import { mapActions } from 'vuex'
 	export default{
 		data(){
 			return{
 				lists:[],
+				lineArr:[],
 			}
 		},
-
 		filters: {
 			hourFormat (h) {
 				var hour = Math.floor(h);
@@ -47,7 +50,14 @@
 		        return str
 			}
 		},
+		computed: {
+			...mapGetters(['chooseLine']),
+		},
 		methods:{
+			addClick(){
+				this.$store.dispatch('fetch_chooseLine',this.lineArr);
+				this.$router.go(-1)
+			},
 			detailsLine(id,poi){
 				this.$router.push({path:'/detailsLine/'+id})
 			},
@@ -56,12 +66,17 @@
 				this.$http.get('/plan/listRoute?cursor=1&fixRegionId=0&limit=1000&regionIds='+_this.$route.params.region)
 				.then(function(res){
 					_this.lists = res.data.data.routeList[0].rlist
+					if (_this.chooseLine.length > 0) {
+						_this.lineArr = _this.chooseLine
+					}
+					Indicator.close();
 				}, function(){
 
 				})
 			}
 		},
-		mounted:function(){
+		created(){
+			Indicator.open();
 			this.getData();
 		},
 	}

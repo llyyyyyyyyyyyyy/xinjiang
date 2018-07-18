@@ -71,7 +71,7 @@ Vue.use(Lazyload)
 
 window.tool = {};
 window.tool.token = function(){
-	return '2a319a52b3e2fed247f74b9bff2c9a02'
+	return 'feeb131c76eb463f11e841b0e1350b7e'
 }
 
 Date.prototype.format = function(seperator) {

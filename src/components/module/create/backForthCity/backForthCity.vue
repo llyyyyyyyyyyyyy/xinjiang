@@ -5,7 +5,7 @@
 		</p>
 		<div v-for="(list, index) in lists" :key="index">
 			<p class="firstKey">{{list.firstKey}}</p>
-			<p class="name" v-for="city in list.citys" @click="chooseCity(city.name)" :key="city.id">{{city.name}}</p>
+			<p class="name" v-for="city in list.citys" @click="chooseCity(city.name,city.id)" :key="city.id">{{city.name}}</p>
 		</div>
 	</div>
 </template>
@@ -24,9 +24,13 @@
 			...mapGetters(['forthCity','backCity'])
 		},
 		methods:{
-			chooseCity(name){
+			chooseCity(name,id){
 				let _this = this;
-				_this.flag ? _this.$store.dispatch('fetch_forthCity',name) : _this.$store.dispatch('fetch_backCity',name)
+				let data = {
+					name: name,
+					id: id
+				}
+				_this.flag ? _this.$store.dispatch('fetch_forthCity',data) : _this.$store.dispatch('fetch_backCity',data)
 				_this.back();
 			},
 			back(){
@@ -36,6 +40,7 @@
 				let _this = this;
 				_this.$http.get('/city/letterGroupNew').then(function(res){
 					_this.lists = res.data.data.resultList
+
 				}, function(){
 
 				})

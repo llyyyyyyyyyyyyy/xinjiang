@@ -26,7 +26,10 @@ import setPreferences from '../components/module/create/setPreferences/setPrefer
 import choosePoi from '../components/module/create/choosePoi/choosePoi.vue'
 // 选择景点
 import poiList from '../components/module/poiList/poiList.vue'
-//
+// 生成动画
+import calculate from '../components/module/create/calculate/calculate.vue'
+
+
 import homeCountry from '../components/home/country/country.vue'
 import homeProvince from '../components/home/province/province.vue'
 import scenic from '../components/home/scenic/scenic.vue'
@@ -47,12 +50,15 @@ export default new Router({
     {
       path: '/trip',
       component:Trip,
-      name:'trip'
+      name:'trip',
     },
     {
       path: '/lineList/:region/:type?',
       component:LineList,
-      name:'lineList'
+      name:'lineList',
+      meat:{
+        keepAlive: false
+      }
     },
     {
       path: '/detailsLine/:id',
@@ -97,12 +103,18 @@ export default new Router({
     {
       path: '/choosePoi',
       component:choosePoi,
-      name:'choosePoi'
+      name:'choosePoi',
+      meat:{
+        keepAlive: false
+      }
     },
     {
       path: '/poiList/:id',
       component:poiList,
-      name:'poiList'
+      name:'poiList',
+      meat:{
+        keepAlive: true
+      }
     },
     {
       path: '/homeCountry/:groupDetailId',
@@ -143,10 +155,18 @@ export default new Router({
       props:true
     },
     {
-      path:'/play',
+      path:'/play/:id/:type?',
       component:play,
       name:'play',
       props:true
+    },
+    {
+      path:'/calculate',
+      component:calculate,
+      name:'calculate',
+      meat:{
+        keepAlive: true
+      }
     }
 
   ]

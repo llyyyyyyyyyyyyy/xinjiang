@@ -1,6 +1,118 @@
 #poi {
   padding-bottom: 0.8rem;
 }
+#poi .play {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(3, 3, 3, 0.2);
+  transition: all 2s;
+}
+#poi .play ol {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+}
+#poi .play ol li {
+  height: 0.98rem;
+  border-bottom: 0.01rem solid #EEEEEE;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#poi .play ol li img {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 0.05rem;
+}
+#poi .play ol li .count {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 2.01rem;
+}
+#poi .play ol li .count .time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #848484;
+  font-size: 0.13rem;
+}
+#poi .play ol li .count .time img {
+  width: 0.14rem;
+  height: 0.14rem;
+  margin-right: 0.06rem;
+}
+#poi .play ol li .count .time span {
+  display: inline-block;
+  height: 0.11rem;
+  line-height: 0.11rem;
+}
+#poi .play ol li .count .time .num {
+  border-left: 0.01rem solid #666666;
+  margin-left: 0.06rem;
+  padding-left: 0.06rem;
+}
+#poi .play ol li .count .name {
+  color: #484848;
+  font-size: 0.15rem;
+}
+#poi .play ol li .count .pre {
+  color: #FB9E09;
+  font-size: 0.13rem;
+  margin: 0.06rem 0;
+}
+#poi .play ol li .count .pre span i {
+  margin: 0 0.03rem;
+}
+#poi .play ol li .count .pre span:last-child > i {
+  display: none;
+}
+#poi .play ol li input[type="radio"] {
+  display: inline-block;
+  width: 0.24rem;
+  height: 0.24rem;
+  display: none;
+  border: none;
+  border: 0.01rem solid red;
+  z-index: 111;
+  position: absolute;
+  right: 0.14rem;
+}
+#poi .play ol li [id^="checkbox-2-"] + label {
+  display: inline-block;
+  width: 0.2rem;
+  height: 0.2rem;
+  background-image: url(../../../assets/images/playAdd.png);
+  background-repeat: no-repeat;
+  background-size: 0.2rem 0.2rem;
+  background-position: 0rem 0rem;
+}
+#poi .play ol li [id^="checkbox-2-"]:checked + label {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-image: url(../../../assets/images/yes.png);
+  background-repeat: no-repeat;
+  background-size: 0.2rem 0.2rem;
+  background-position: 0rem 0rem;
+}
+#poi .play ol .playBtn {
+  height: 0.82rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#poi .play ol .playBtn p {
+  width: 3.27rem;
+  height: 0.5rem;
+  background: #119DFF;
+  line-height: 0.5rem;
+  text-align: center;
+  border-radius: 0.05rem;
+  color: #fff;
+}
 #poi .line {
   display: block;
   width: 3.27rem;

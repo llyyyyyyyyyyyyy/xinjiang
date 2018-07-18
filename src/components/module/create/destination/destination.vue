@@ -170,6 +170,7 @@
 				this.cityName = this.destination[num].name
 			}
 		},
+
 		created(){
 			this.getData(0)
 		},

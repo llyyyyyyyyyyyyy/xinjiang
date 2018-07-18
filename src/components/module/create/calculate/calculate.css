@@ -1,0 +1,140 @@
+@keyframes my_animat {
+  0% {
+    bottom: 0.11rem;
+  }
+  1% {
+    bottom: 3rem;
+  }
+  10% {
+    bottom: 3rem;
+  }
+  20% {
+    bottom: 3rem;
+  }
+  100 {
+    bottom: 0.11rem;
+  }
+}
+@keyframes my_animat_box {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.calculate {
+  color: #fff;
+  overflow: hidden;
+  /* position: relative; */
+  background-size: cover;
+}
+.calculate .loading-box {
+  position: absolute;
+  width: 100%;
+  bottom: 0.25rem;
+  animation: my_animat 1s;
+}
+.calculate .loading-box .calculate-progress {
+  width: 0%;
+  height: 0.01rem;
+  text-align: right;
+  position: relative;
+  background: linear-gradient(-180deg, #27c4fe 0%, #4997ff 100%);
+}
+.calculate .loading-box .calculate-progress:after {
+  display: block;
+  position: absolute;
+  top: -0.2rem;
+  right: 0;
+}
+.calculate .loading-box .calculate-step {
+  padding: 0.35rem 0.6rem 0.32rem;
+  font-size: 0.16rem;
+  font-weight: 500;
+  letter-spacing: 0.008rem;
+  display: table;
+  width: 100%;
+  height: 0.65rem;
+  position: relative;
+}
+.calculate .loading-box .calculate-step .step-container {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: .12rem;
+  color: #333;
+  position: absolute;
+  top: .35rem;
+  left: .65rem;
+}
+.calculate .loading-box .calculate-step .calculate-box {
+  width: .15rem;
+  height: .15rem;
+  position: absolute;
+  left: .3rem;
+  background: -webkit-linear-gradient(left, #27C4FE, #4997FF);
+  background: -o-linear-gradient(left, #27C4FE, #4997FF);
+  background: linear-gradient(to right, #27C4FE, #4997FF);
+  animation: my_animat_box 1.5s;
+  animation-iteration-count: infinite;
+}
+.show-box {
+  position: absolute;
+  bottom: 1rem;
+  left: 0.3rem;
+  right: 0.3rem;
+  padding: 0.08rem 0.3rem 0.17rem;
+  background: rgba(255, 255, 255, 0.07);
+  margin: auto;
+  border-radius: 0.1rem;
+  transition: all ease 0.5s;
+  overflow: hidden;
+}
+.show-box > * {
+  opacity: 0.3;
+  transition: all ease 0.3s;
+}
+.show-box > *:first-child {
+  /*margin-top: 0;*/
+}
+.show-box > *:last-child {
+  opacity: 0.6;
+  /*margin-bottom: 0;*/
+}
+.show-box > *:nth-last-child(2) {
+  opacity: 0.5;
+}
+.show-box > *:nth-last-child(3) {
+  opacity: 0.4;
+}
+/*.show-box.done > *{
+  opacity: 0.3 !important;
+  transition: all ease 0.8s;
+}*/
+.show-box strong {
+  margin: 0.12rem 0 0.1rem 0;
+  display: block;
+  font-size: 0.16rem;
+  letter-spacing: 0.008rem;
+}
+.show-box span {
+  display: block;
+  margin-bottom: 0.02rem;
+  font-size: 0.14rem;
+}
+.spend-box {
+  height: 0.2rem;
+  position: absolute;
+  bottom: 0.65rem;
+  padding-left: 0.22rem;
+  color: #999;
+}

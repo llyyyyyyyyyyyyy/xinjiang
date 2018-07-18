@@ -32,14 +32,14 @@
 				<div>
 					<span class="title">出发</span>
 					<span class="scope">
-						<router-link :to="{ name: 'backForthCity', params: { type:'forth' } }">{{forthCity}}</router-link>
+						<router-link :to="{ name: 'backForthCity', params: { type:'forth' } }">{{forthCity.name}}</router-link>
 					</span>
 					<span class="leftBtn">
 						<img src="../../../../assets/images/left.png" alt="">
 					</span>
 					<span class="title">返回</span>
 					<span class="scope">
-						<router-link :to="{ name: 'backForthCity', params: { type:'back' } }">{{backCity}}</router-link>
+						<router-link :to="{ name: 'backForthCity', params: { type:'back' } }">{{backCity.name}}</router-link>
 					</span>
 					<span class="leftBtn">
 						<img src="../../../../assets/images/left.png" alt="">
@@ -115,8 +115,6 @@
 			}
 		},
 		beforeRouteEnter(to, from, next){
-			console.log(to)
-			
 			next((vm) => {
 				if (typeof vm.prefer[0] != 'object' || (vm.prefer.length == 1 && vm.prefer[0].name == '不限')) return
 				vm.preFlag = true;

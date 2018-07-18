@@ -12,14 +12,16 @@
 					</div>
 					<p>
 						<span>{{item.name}}</span>
-						<span class="num">已选景点 0/{{item.ssCount}}</span>
+						<span v-if="(item.preData && item.preData.length > 0)" :class=" (item.preData && item.preData.length > 0) ? 'num_' : 'num'">已选景点 {{item.preData.length}}/{{item.ssCount}}</span>
+						<span v-if="(!item.preData || item.preData.length == 0)" :class=" (!item.preData || item.preData.length == 0) ? 'num' : 'num_'">已选景点 0/{{item.ssCount}}</span>
 					</p>
 				</div>
-				<router-link class="btn" :to="{ name: 'poiList', params:{ id: item.id } }">去添加</router-link>
+				<router-link :class="(item.preData && item.preData.length > 0) ? 'btn_' : 'btn'" :to="{ name: 'poiList', params:{ id: item.id } }">{{(item.preData && item.preData.length > 0) ? '去修改' : '去添加'}}</router-link>
+
 			</li>
 		</ul>
 		<div class="nextBtn">
-			<p>下一步：确认已选景点</p>
+			<p :class="btnFlag ? 'next' : ''" @click="next">下一步：生成行程计划</p>
 		</div>
 	</div>
 </template>
@@ -30,16 +32,27 @@
 	export default{
 		data(){
 			return{
-
+				btnFlag:false,
 			}
 		},
 		computed: {
 			...mapGetters(['cityData']),
 		},
 		methods:{
-			
+			next(){
+				if (!this.btnFlag) return
+				this.$router.push({path: '/calculate'})
+			},
+			getFlag(){
+				for (var i = 0; i < this.cityData.length; i++) {
+					if(this.cityData[i].preData && this.cityData[i].preData.length > 0) {
+						this.btnFlag = true
+					}
+				}
+			}
 		},
 		created(){
+			this.getFlag()
 		},
 	}
 </script>
