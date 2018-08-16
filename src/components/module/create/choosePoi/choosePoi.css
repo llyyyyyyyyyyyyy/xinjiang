@@ -1,0 +1,91 @@
+#choosePoi {
+  padding-top: 0.61rem;
+}
+#choosePoi h3 {
+  font-size: 0.24rem;
+  color: #484848;
+  padding: 0.14rem 0.24rem;
+  border-bottom: 0.01rem solid #eee;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+}
+#choosePoi ul li {
+  display: flex;
+  justify-content: space-between;
+  -ms-align-items: flex-end;
+  align-items: flex-end;
+  padding: 0 0.24rem;
+  margin-top: 0.47rem;
+}
+#choosePoi ul li img {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0.05rem;
+  margin-right: 0.12rem;
+}
+#choosePoi ul li .btn {
+  width: 1.2rem;
+  height: 0.3rem;
+  color: #fff;
+  line-height: 0.3rem;
+  text-align: center;
+  background: #119DFF;
+  border-radius: 0.05rem;
+  font-size: 0.12rem;
+}
+#choosePoi ul li .btn_ {
+  width: 1.2rem;
+  height: 0.3rem;
+  color: #119DFF;
+  line-height: 0.3rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 0.05rem;
+  font-size: 0.12rem;
+  border: 0.01rem solid #119DFF;
+}
+#choosePoi ul li > div {
+  display: flex;
+}
+#choosePoi ul li > div p {
+  display: flex;
+  flex-direction: column;
+}
+#choosePoi ul li > div p span {
+  margin-top: 0.07rem;
+  font-size: 0.15rem;
+  color: #484848;
+}
+#choosePoi ul li > div p .num {
+  font-size: 0.11rem;
+  color: #848484;
+}
+#choosePoi ul li > div p .num_ {
+  font-size: 0.11rem;
+  color: #119DFF;
+}
+#choosePoi .nextBtn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 0.82rem;
+  border-top: 0.01rem solid #EEEEEE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#choosePoi .nextBtn p {
+  width: 3.27rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  text-align: center;
+  color: #fff;
+  background: #D9D9D9;
+  border-radius: 0.05rem;
+  font-size: 0.15rem;
+}
+#choosePoi .nextBtn .next {
+  background: #119DFF;
+}

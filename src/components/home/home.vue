@@ -177,7 +177,7 @@ export default {
         },
         //获取数据
         getHomeData(){
-            this.$http.get('xl/face/list').then(res => {
+            this.$http.get('/face/list').then(res => {
                 this.homeinfo = res.data.data.faceList
                 this.country = this.homeinfo[0].detailList//国家
                 // console.log(this.country)

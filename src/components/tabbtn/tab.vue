@@ -1,6 +1,6 @@
 <template>
     <ul class="tabs">
-        <li v-for="(tab,index) in tabs"  @click="myClick(index)" :class="tab.isHigh ? '':'clickIcon'" :key = "index">
+        <li v-for="(tab,index) in tabs"  @click="myClick(index,tab.paths)" :class="tab.isHigh ? '':'clickIcon'" :key = "index">
             <a>
                 <img  :src="tab.isHigh ? tab.tabImg : tab.tabHigh" :class="index==2 ? 'bigTab' : ''" >
             </a>
@@ -27,11 +27,11 @@ export default {
                     isHigh:true,
                 },
                 {
-						tabImg:require('../../assets/images/tabicons/add.png'),
-						tabHigh:require('../../assets/images/tabicons/add.png'),
-						paths:'/add',
-						isHigh:true,
-					},
+					tabImg:require('../../assets/images/tabicons/add.png'),
+					tabHigh:require('../../assets/images/tabicons/add.png'),
+					paths:'/country',
+					isHigh:true,
+				},
                 {
                     tabImg:require('../../assets/images/tabicons/dest@3x.png'),
                     tabHigh:require('../../assets/images/tabicons/dest-active@3x.png'),
@@ -49,13 +49,14 @@ export default {
         }
 	},
     methods:{
-        myClick (index){
+        myClick (index,str){
             for(let i = 0; i < this.tabs.length; i++){
 				this.tabs[i].isHigh = true;
 			}
             this.tabs[index].isHigh = false;
+            this.$router.push({path: str})
         }
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>

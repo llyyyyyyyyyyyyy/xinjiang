@@ -3,13 +3,14 @@
         <div class="map">
         </div> 
         <header>
-            <h2>2018.06.15 - 2018.06.22</h2>
-            <h3>梦幻的浪漫之旅 · 希腊7日游</h3>
-            <h4><span>7·天数</span> 
-                <span>4·城市</span>
-                <span>6·景点</span>
-                <span>2·航班</span>
-                <span>4·酒店</span>
+            <h2>{{typeData.fromDateStr}} - {{typeData.dayList|back_date}}</h2>
+            <h3>{{typeData.name}}</h3>
+            <h4>
+                <span v-if="typeData.dayCount != 0">{{typeData.dayCount}}·天数</span> 
+                <span v-if="typeData.cityCount != 0">{{typeData.cityCount}}·城市</span>
+                <span v-if="typeData.scenicSpotCount != 0">{{typeData.scenicSpotCount}}·景点</span>
+                <span v-if="typeData.flightCount != 0">{{typeData.flightCount}}·航班</span>
+                <span v-if="typeData.hotelCount != 0">{{typeData.hotelCount}}·酒店</span>
             </h4>
             <div class="playInfo">
                 <p>
@@ -19,41 +20,44 @@
                 <img src="../../../assets/images/Group 19@3x.png" alt="">
             </div>
         </header> 
-        <div class="dayTitle">
-            <img class="left" src="../../../assets/images/Rectangle 37 Copy@2x.png" alt="">
-            day 1
-            <img class="right" src="../../../assets/images/Rectangle 37@2x.png" alt="">
-        </div>
-        <div class="playCont">
-            <div class="place">
-                <p>北京 - 丽江 - 虎跳崖 - 玉龙雪山 - 丽江古城 - 大理 - 虎跳崖
-                    <span>查看详情  ></span>
-                </p>
-                <img src="../../../assets/images/Group 19@3x.png" alt="">
-                <div class="shade"></div>
+        <div class="count" v-for="(item, index) in typeData.dayList" :key="item.id">
+            <div class="dayTitle">
+                <img class="left" src="../../../assets/images/Rectangle 37 Copy@2x.png" alt="">
+                day {{index+1}}
+                <img class="right" src="../../../assets/images/Rectangle 37@2x.png" alt="">
             </div>
-            <div class="info">
-                <div class="way">
-                    <h3>
-                        <img src="../../../assets/images/实心飞机@3x.png" alt=""><!--
-                    --><span>北京 - 希腊</span><!--
-                    --><i>¥ 3420</i>
-                    </h3>
-                    <h4>CA1021 06.15 02:30 - 13:35</h4>
+            <div class="playCont">
+                <div class="place">
+                    <p>{{typeData.subTitle}}
+                        <span>查看详情  ></span>
+                    </p>
+                    <img src="../../../assets/images/Group 19@3x.png" alt="">
+                    <div class="shade"></div>
                 </div>
-                <div class="way">
-                    <h3>
-                        <img src="../../../assets/images/实心房子@3x.png" alt=""><!--
-                    --><span>希尔顿雅典酒店</span><!--
-                    --><i>¥ 1088</i>
-                    </h3>
-                    <h4>住宿地：雅典市中心</h4>
+                <div class="info">
+                    <div class="way" v-for="(c, index) in item.dayLine" :key="index" v-if="c.type == 'flight'">
+                        <h3>
+                            <img src="../../../assets/images/实心飞机@3x.png" alt=""><!--
+                        --><span>{{c.superStartName}} - {{c.superEndName}}</span><!--
+                        --><i>¥ </i>
+                        </h3>
+                        <h4>CA1021 06.15 02:30 - 13:35</h4>
+                    </div>
+                    <div class="way" v-for="(h, index) in item.dayLine" :key="index" v-if="h.type == 'hotel' && index != 0">
+                        <h3>
+                            <img src="../../../assets/images/实心房子@3x.png" alt=""><!--
+                        --><span>{{h.hotelList[0].name}}</span><!--
+                        --><i>¥ </i>
+                        </h3>
+                        <h4>住宿地：{{h.recomAreaName}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <footer>
             <div class="tiao">调整景点</div>
-            <div class="ok">完成</div>
+            <div class="ok" @click="save">完成</div>
         </footer>
     </div> 
 </template>
@@ -61,12 +65,50 @@
 export default {
     data(){
         return{
+            //行程数据
+            typeData:[],
         }
+    },
+    filters:{
+        back_date(data){
+            if (!data) return
+            var num = data.length - 1;
+            return data[num].dayDateStr
+        }
+    },
+    methods:{
+        save(){
+
+            const _this = this;
+            let id = _this.$route.params.id
+            _this.$http.post('/plan/save',{
+                planId:id,
+                invalidPlanId:'',
+                token: tool.token(),
+            }).then(function(res){
+                    _this.$router.push({path: '/trip'})
+            })
+        },
+        getData(){
+            let _this = this;
+            let id = _this.$route.params.id
+            _this.$http.get('/plan?token='+tool.token()+'&id='+id+'&ver=2')
+            .then(function(res){
+                _this.typeData = res.data.data.plan
+            })
+        },
+    },
+    created(){
+        this.getData()
     }
 }
 </script>
 <style lang="scss" scoped>
 .play{
+    padding-bottom:.9rem;
+    .count{
+        margin-bottom: 0.2rem;
+    }
     .map{
         height: 1.66rem;
         background: #ccc;
@@ -161,13 +203,12 @@ export default {
             }
         }
         .info{
-            height: 1.17rem;
             width: 3.27rem;
             box-shadow:5px 0 6px -2px  #F6F6F6,
                         -5px 0 6px -2px  #F6F6F6,
                         0 5px 6px -2px #F6F6F6,
                         0 0px 0px 0px #F6F6F6;
-            padding: 0 0.21rem 0 0.17rem;
+            padding: 0.1rem 0.21rem 0.1rem 0.17rem;
             box-sizing: border-box;
             .way{
                 margin-top:0.14rem;
@@ -201,7 +242,7 @@ export default {
         bottom: 0;
         height: 0.82rem;
         width: 100%;
-        background: #ccc;
+        background: #fff;
         .tiao{
             height: 0.5rem;
             width: 1.07rem;

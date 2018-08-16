@@ -1,0 +1,48 @@
+#createWay .introduce {
+  position: fixed;
+  top: 0.61rem;
+  padding: 0 0.24rem;
+  font-size: 0.12rem;
+  color: #848484;
+}
+#createWay > h3 {
+  font-size: 0.24rem;
+  color: #484848;
+  padding: 0.14rem 0.24rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+}
+#createWay > div a {
+  width: 2.67rem;
+  height: 2.2rem;
+  margin: 0 auto;
+  margin-top: 1.0rem;
+  box-shadow: 0px 0px 30px 10px #eee;
+  border-radius: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#createWay > div a img {
+  width: 0.75rem;
+}
+#createWay > div a h3 {
+  color: #333333;
+  font-size: 0.15rem;
+  margin: 0.17rem 0 0.13rem 0;
+}
+#createWay > div a p {
+  color: #999999;
+  font-size: 0.12rem;
+  width: 1.34rem;
+  text-align: center;
+}
+#createWay .smart {
+  margin-top: 0.3rem;
+}
+#createWay .smart a {
+  margin-top: 0;
+}
