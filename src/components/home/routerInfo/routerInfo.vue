@@ -29,7 +29,7 @@
         <div class="mapbox">
 
         </div>
-        <div class="rouList">
+        <div class="rouList" v-for="n in this.routerData.dayList" :key="n.id">
             <div class="days">
                 <span style="margin-right: 0.12rem">DAY 1</span>
                 <span>丽江</span>

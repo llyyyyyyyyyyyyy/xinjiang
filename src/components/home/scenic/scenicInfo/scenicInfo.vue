@@ -387,14 +387,14 @@ export default {
                 line-height: 0.21rem;
                 img{
                     padding-top: 0.04rem;
-                    display: inline-block;
+                    // display: inline-block;
                     vertical-align:middle;
                     width: 0.14rem;
                     height: 0.14rem;
                     float: left;
                 }
                 span{
-                    display: inline-block;
+                    // display: inline-block;
                     float: left;
                     top:0;
                     margin:0 0.12rem;
