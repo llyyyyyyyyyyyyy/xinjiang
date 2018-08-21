@@ -29,6 +29,7 @@ import poiList from '../components/module/poiList/poiList.vue'
 // 生成动画
 import calculate from '../components/module/create/calculate/calculate.vue'
 
+import pic from '../components/mode/picture.vue'
 
 import homeCountry from '../components/home/country/country.vue'
 import homeProvince from '../components/home/province/province.vue'
@@ -167,6 +168,11 @@ export default new Router({
       meat:{
         keepAlive: true
       }
+    },
+    {
+      path:'/pic',
+      component:pic,
+      name:'pic'
     }
 
   ]
