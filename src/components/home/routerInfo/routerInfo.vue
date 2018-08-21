@@ -83,7 +83,7 @@ export default {
     },
     methods :{
         getRouterData(){
-            this.$http.get('http://xunlu.dev.mydeertrip.com/route',{
+            this.$http.get('/route',{
             params:{id:199,entry:1,dayCount:1}
         }).then(res =>{
             console.log(res.data.data.route)

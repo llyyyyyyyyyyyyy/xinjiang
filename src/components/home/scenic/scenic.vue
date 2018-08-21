@@ -95,7 +95,7 @@ export default {
         //获取景点列表
         getSceList(){
             let that = this.groupDetailId
-            this.$http.get('http://xunlu.dev.mydeertrip.com/plan/sslist',{
+            this.$http.get('/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:that
                 }}).then(res => {
                     this.sceList = res.data.data.regionDetail[0].ssList
@@ -105,7 +105,7 @@ export default {
         //获取线路列表
         getRouList(){
             let that = this.groupDetailId
-            this.$http.get('http://xunlu.dev.mydeertrip.com/plan/listRoute',{
+            this.$http.get('/plan/listRoute',{
                 params:{cursor:1,limit:100,regionIds:that
                 }}).then(res => {
                    this.rouList = res.data.data.routeList[0].rlist

@@ -44,7 +44,7 @@ export default {
         //获取本页面数据
         getCouData(){
             let that = this.groupDetailId
-            this.$http.get('http://xunlu.dev.mydeertrip.com/face/group/detail',{
+            this.$http.get('/face/group/detail',{
             params:{detailId:that}
       }).then(res => {
                 console.log(res.data.data.detail)

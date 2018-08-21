@@ -175,7 +175,7 @@ export default {
     methods: {
         //获取景点详情
         getSceInfoData(){
-            this.$http.get('http://xunlu.dev.mydeertrip.com/scenic_spots/guide',{
+            this.$http.get('/scenic_spots/guide',{
             params:{id:this.id,beginDate:'2018-06-20',dayCount:1,token:''}
         }).then(res => {
                 console.log(this.id)

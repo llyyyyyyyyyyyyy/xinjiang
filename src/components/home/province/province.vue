@@ -33,7 +33,7 @@ export default {
     methods:{
         //获取本页面数据
         getProData(){
-            this.$http.get('http://xunlu.dev.mydeertrip.com/city/show/regions').then(res => {
+            this.$http.get('/city/show/regions').then(res => {
                 this.datalist=res.data.data;
                 this.judgePro() 
                 Indicator.close();

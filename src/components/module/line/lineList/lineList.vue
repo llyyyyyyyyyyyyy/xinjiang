@@ -1,6 +1,6 @@
 <template>
 	<div id="list">
-		<div class="lists" v-for="(poi,index) in lists">
+		<div class="lists" v-for="(poi,index) in lists" :key="index">
 			<div class="imgs" @click="detailsLine(poi.id,poi)">
 				<img :src="poi.img+'-GDcreateroute3.ht'" alt="">
 			</div>

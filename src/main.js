@@ -31,7 +31,7 @@ import rem from './assets/rem'
 import MD from './assets/modulData.js'
 
 //接口api
-window.api = 'http://xunlu.dev.mydeertrip.com'
+window.api = 'http://47.92.39.131:8788'
 //appKey
 window.appKey = 'xunlu'
 //大区id
