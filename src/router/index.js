@@ -28,6 +28,8 @@ import choosePoi from '../components/module/create/choosePoi/choosePoi.vue'
 import poiList from '../components/module/poiList/poiList.vue'
 // 生成动画
 import calculate from '../components/module/create/calculate/calculate.vue'
+// 行程详情
+import tripDetails from '../components/module/tripDetails/tripDetails.vue'
 
 import pic from '../components/mode/picture.vue'
 
@@ -43,13 +45,13 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    // {
+    //   path: '/',
+    //   component:Home,
+    //   name:'Home'
+    // },
     {
       path: '/',
-      component:Home,
-      name:'Home'
-    },
-    {
-      path: '/trip',
       component:Trip,
       name:'trip',
     },
@@ -170,6 +172,11 @@ export default new Router({
       }
     },
     {
+      path:'/tripDetails',
+      component:tripDetails,
+      name:'tripDetails',
+    },
+	{
       path:'/pic',
       component:pic,
       name:'pic'

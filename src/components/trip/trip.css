@@ -65,6 +65,9 @@
 	border-radius: 0.08rem;
 	/* box-shadow: 0 0 0.4rem 0 rgba(52,52,55,0.10); */
 }
+#trip .jp{
+	margin: 0.18rem 0.24rem 0.18rem;
+}
 #trip .tripHeader .title{
 	text-align: left;
 	/* color: #484848; */
@@ -83,15 +86,15 @@
 
 #trip .swiper-slide {
 	margin: 0;
-	width: 2.46rem;
+	width: 2.05rem;
 	padding: 0.1rem 0 0;
 }
 #trip .swiper-slide .trip-item{
 	display: block;
 	width: 100%;
   	max-height: 100%;
-	transform: scale(0.9);
-	transition: all ease 0.35s;
+/*	transform: scale(0.9);
+	transition: all ease 0.35s;*/
 	position: relative;
 	box-shadow: 0 0.02rem 0.04rem 0 rgba(0,0,0,0.50);
 	/* overflow: hidden; */
@@ -108,7 +111,7 @@
 	background-image: linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.00) 80%);
 }
 #trip .swiper-slide.swiper-slide-active .trip-item{
-	transform: scale(1);
+	/*transform: scale(1);*/
 }
 #trip .swiper-slide .trip-item img{
 	display: block;
@@ -116,11 +119,23 @@
 	border-radius: 0.05rem
 }
 
+#trip .addBtn{
+	width: .46rem;
+	height: .46rem;
+	position: fixed;
+	bottom: .2rem;
+	left: 50%;
+	margin-left: -.23rem;
+}
+#trip .addBtn img{
+	width: 100%;
+}
+
 .playDay{
     font-size: 0.16rem;
     position: absolute;
-    bottom: -0.56rem;
-    color: #484848;
+    bottom: 0.14rem;
+    color: #fff;
     display: flex;
     justify-content: flex-start;
     letter-spacing: 0.4px;
@@ -158,5 +173,5 @@
     font-size: 0.12rem;
     letter-spacing: 0.3px;
 	padding-top: 0.07rem;
-	color: #717171;
+	color: #fff;
 }

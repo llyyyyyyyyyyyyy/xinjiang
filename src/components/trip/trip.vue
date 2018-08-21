@@ -42,6 +42,17 @@
 				</swiper>
 			</div>
 		</div>
+		<div class="tripHeader jp">
+			<p class="title">
+				<router-link to="">
+					<!-- <span><i class="icon-plus"></i></span> -->
+					<span>精选行程</span>
+				</router-link>
+			</p>
+		</div>
+		<router-link to='/country' class="addBtn">
+			<img src="../../assets/images/tabicons/add.png" alt="">
+		</router-link>
 	</div>
 </template>
 <script scoped>
@@ -63,9 +74,7 @@
 		},
 		methods:{
 	      	toDetails:function (plan_id,user_id) {
-	      		alert('行程详情！')
-		      	return;
-		        
+		        this.$router.push({path: '/play/'+plan_id})
 	      	},
 			delClick: function(id){
 				const _this = this;
@@ -170,7 +179,6 @@
 		border-radius: .05rem;
 	}
 	#trip .swiper-container{
-		padding-bottom: .5rem !important;
 		padding-left: 0.64rem;
 	}
 </style>
