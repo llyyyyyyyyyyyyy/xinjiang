@@ -7,7 +7,8 @@ import Vuex from 'vuex'
 import store from './store/store.js'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
-
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
 //mint ui
 import { Lazyload } from 'mint-ui'
@@ -67,6 +68,10 @@ Vue.use(lazy)
 Vue.use(Vuex)
 Vue.use(Mint)
 Vue.use(Lazyload)
+Vue.use(iView, {
+    transfer: true,
+    size: 'large'
+});
 
 
 window.tool = {};

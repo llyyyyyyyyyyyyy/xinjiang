@@ -28,6 +28,8 @@ import choosePoi from '../components/module/create/choosePoi/choosePoi.vue'
 import poiList from '../components/module/poiList/poiList.vue'
 // 生成动画
 import calculate from '../components/module/create/calculate/calculate.vue'
+// 行程详情
+import tripDetails from '../components/module/tripDetails/tripDetails.vue'
 
 
 import homeCountry from '../components/home/country/country.vue'
@@ -167,6 +169,11 @@ export default new Router({
       meat:{
         keepAlive: true
       }
+    },
+    {
+      path:'/tripDetails',
+      component:tripDetails,
+      name:'tripDetails',
     }
 
   ]

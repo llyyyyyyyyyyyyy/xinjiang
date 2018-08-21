@@ -29,7 +29,7 @@
             <div class="playCont">
                 <div class="place">
                     <p>{{typeData.subTitle}}
-                        <span>查看详情  ></span>
+                        <router-link to='/tripDetails'>查看详情  ></router-link>
                     </p>
                     <img src="../../../assets/images/Group 19@3x.png" alt="">
                     <div class="shade"></div>
@@ -178,7 +178,7 @@ export default {
                 line-height: 0.18rem;
                 padding: 0.16rem 0.20rem 0;
                 position: relative;
-                span{
+                a{
                     position: absolute;
                     right: 0.29rem;
                     font-size: 0.1rem;
