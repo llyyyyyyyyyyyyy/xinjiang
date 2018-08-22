@@ -45,9 +45,9 @@
                     </div>
                     <div class="way" v-for="(h, index) in item.dayLine" :key="index" v-if="h.type == 'hotel' && index != 0">
                         <h3>
-                            <img src="../../../assets/images/实心房子@3x.png" alt=""><!--
-                        --><span>{{h.hotelList[0].name}}</span><!--
-                        --><i>¥ </i>
+                            <img src="../../../assets/images/实心房子@3x.png" alt="">
+                            <!-- <span>{{h.hotelList[0].name}}</span> -->
+                            <i>¥ </i>
                         </h3>
                         <h4>住宿地：{{h.recomAreaName}}</h4>
                     </div>
@@ -95,6 +95,7 @@ export default {
             _this.$http.get('/plan?token='+tool.token()+'&id='+id+'&ver=2')
             .then(function(res){
                 _this.typeData = res.data.data.plan
+                console.log(res)
             })
         },
     },

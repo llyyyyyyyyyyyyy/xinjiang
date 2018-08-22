@@ -31,7 +31,7 @@ import calculate from '../components/module/create/calculate/calculate.vue'
 // 行程详情
 import tripDetails from '../components/module/tripDetails/tripDetails.vue'
 
-import pic from '../components/mode/picture.vue'
+import pic from '../components/module/tripDetails/picture/picture.vue'
 
 import homeCountry from '../components/home/country/country.vue'
 import homeProvince from '../components/home/province/province.vue'
